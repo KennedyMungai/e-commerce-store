@@ -18,13 +18,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { credentialsSignupAction } from "@/features/auth/actions/auth-actions";
 import Socials from "@/features/auth/components/socials";
 import { SignupSchema, SignupType } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const SignupForm = () => {
+  const { execute, isPending } = useAction(credentialsSignupAction, {
+    onSuccess: () => toast.success("Confirmation email sent"),
+    onError: () => toast.error("Something went wrong, please try again"),
+  });
+
   const form = useForm<SignupType>({
     resolver: zodResolver(SignupSchema),
     defaultValues: {
@@ -35,7 +43,11 @@ const SignupForm = () => {
     },
   });
 
-  const onSubmit = (values: SignupType) => console.log(values);
+  const onSubmit = (values: SignupType) => {
+    execute(values);
+
+    form.reset();
+  };
 
   return (
     <Card className="min-w-[600px]">
@@ -55,7 +67,12 @@ const SignupForm = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Name" type="text" />
+                    <Input
+                      {...field}
+                      placeholder="Name"
+                      type="text"
+                      disabled={form.formState.isSubmitting || isPending}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -68,7 +85,12 @@ const SignupForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Email" type="email" />
+                    <Input
+                      {...field}
+                      placeholder="Email"
+                      type="email"
+                      disabled={form.formState.isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,7 +103,12 @@ const SignupForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Password" type="password" />
+                    <Input
+                      {...field}
+                      placeholder="Password"
+                      type="password"
+                      disabled={form.formState.isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -98,13 +125,18 @@ const SignupForm = () => {
                       {...field}
                       placeholder="Confirm Password"
                       type="password"
+                      disabled={form.formState.isSubmitting}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className="mt-4 w-full" type="submit">
+            <Button
+              className="mt-4 w-full"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
               Sign In
             </Button>
           </form>
@@ -112,7 +144,7 @@ const SignupForm = () => {
       </CardContent>
       <CardFooter className="flex flex-col">
         <Socials />
-        <Button variant="link" asChild>
+        <Button variant="link" asChild disabled={form.formState.isSubmitting}>
           <Link href="/signin">Already have an account?</Link>
         </Button>
       </CardFooter>

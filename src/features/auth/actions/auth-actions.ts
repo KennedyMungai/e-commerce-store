@@ -38,6 +38,8 @@ export const credentialsSignupAction = actionClient
 
       if (existingUser) throw new Error("User signup failed");
 
+      // TODO: Send confirmation email
+
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const [user] = await db
@@ -53,7 +55,7 @@ export const credentialsSignupAction = actionClient
     },
   );
 
-export const credentialsSignoutAction = actionClient.action(async () => {
+export const signoutAction = actionClient.action(async () => {
   await signOut();
 });
 
