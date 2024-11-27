@@ -1,12 +1,15 @@
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getVerificationTokenByToken } from "@/lib/verification-queries";
+import { verifyEmail } from "@/lib/verify-email";
 import { CheckCircleIcon, TriangleAlertIcon } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
   searchParams: {
@@ -34,9 +37,9 @@ const VerifyEmail = async ({ searchParams }: Props) => {
     );
   }
 
-  const verificationToken = await getVerificationTokenByToken(token);
+  const isVerified = await verifyEmail(token);
 
-  if (!verificationToken || verificationToken.expires < new Date()) {
+  if (!isVerified) {
     return (
       <Card className="min-h-[200px] min-w-[400px]">
         <CardHeader>
@@ -63,6 +66,11 @@ const VerifyEmail = async ({ searchParams }: Props) => {
         <CheckCircleIcon className="size-10 text-emerald-500" />
         <p className="text-muted-foreground">Your email has been verified</p>
       </CardContent>
+      <CardFooter>
+        <Button variant={"link"} asChild>
+          <Link href={"/signin"}>Go to login</Link>
+        </Button>
+      </CardFooter>
     </Card>
   );
 };
