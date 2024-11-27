@@ -18,13 +18,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { credentialsSigninAction } from "@/features/auth/actions/auth-actions";
 import Socials from "@/features/auth/components/socials";
 import { SigninSchema, SigninType } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const SigninForm = () => {
+  const { execute, isPending } = useAction(credentialsSigninAction, {
+    onSuccess: () => toast.success("Sign in successful"),
+    onError: () => toast.error("Something went wrong, please try again"),
+  });
+
   const form = useForm<SigninType>({
     resolver: zodResolver(SigninSchema),
     defaultValues: {
@@ -33,10 +41,14 @@ const SigninForm = () => {
     },
   });
 
-  const onSubmit = (values: SigninType) => console.log(values);
+  const onSubmit = (values: SigninType) => {
+    execute(values);
+
+    form.reset();
+  };
 
   return (
-    <Card className="min-w-[600px]">
+    <Card className="max-w-[400px]">
       <CardHeader>
         <CardTitle className="text-3xl">Sign in</CardTitle>
         <CardDescription className="text-muted-foreground">
@@ -53,7 +65,12 @@ const SigninForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Email" />
+                    <Input
+                      {...field}
+                      placeholder="Email"
+                      type="email"
+                      disabled={isPending || form.formState.isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -66,24 +83,42 @@ const SigninForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Password" />
+                    <Input
+                      {...field}
+                      placeholder="Password"
+                      type="password"
+                      disabled={isPending || form.formState.isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className="w-full" type="submit">
+            <Button
+              className="w-full"
+              type="submit"
+              disabled={isPending || form.formState.isSubmitting}
+            >
               Sign In
             </Button>
           </form>
         </Form>
-        <Button asChild className="mt-4" variant={"link"}>
+        <Button
+          asChild
+          className="mt-4"
+          variant={"link"}
+          disabled={isPending || form.formState.isSubmitting}
+        >
           <Link href="/signin/forgot-password">Forgot Password?</Link>
         </Button>
       </CardContent>
       <CardFooter className="flex flex-col">
         <Socials />
-        <Button variant="link" asChild>
+        <Button
+          variant="link"
+          asChild
+          disabled={isPending || form.formState.isSubmitting}
+        >
           <Link href="/signup">Don&apos;t have an account?</Link>
         </Button>
       </CardFooter>

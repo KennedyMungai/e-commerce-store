@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   githubAuthAction,
   googleAuthAction,
-} from "@/features/auth/actions/socials-action";
+} from "@/features/auth/actions/auth-actions";
 import { useAction } from "next-safe-action/hooks";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";

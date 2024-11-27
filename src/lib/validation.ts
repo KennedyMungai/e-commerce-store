@@ -6,8 +6,8 @@ export const SigninSchema = z.object({
     .string()
     .min(1, "Password is required")
     .regex(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-      "Password must be at least 8 characters long and contain at least one letter and one number",
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/,
+      "Password must be at least 8 characters long and contain at least one letter, one number, and one special character",
     ),
 });
 
