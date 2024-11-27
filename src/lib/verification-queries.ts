@@ -39,7 +39,7 @@ export const createVerificationToken = async (email: string) => {
       token,
       expires,
     })
-    .returning({ token: verificationTokens.token });
+    .returning();
 
   return newVerificationToken;
 };
