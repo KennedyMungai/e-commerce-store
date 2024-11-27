@@ -3,10 +3,11 @@ export const DEFAULT_REDIRECT_ROUTE = "/";
 export const authRoutes = [
   "/signin",
   "/signup",
-  "/forgot-password",
-  "/password-reset",
+  "/signin/forgot-password",
+  "/signin/password-reset",
+  "/signup/verify-email",
 ];
 
-export const adminRoutes = ["/dashboard"];
+export const adminRoutePrefix = "/dashboard";
 
-export const apiAuthPrefix = "/api/auth";
+export const apiAuthPrefix = "/api";
