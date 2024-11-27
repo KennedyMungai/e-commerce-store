@@ -3,9 +3,11 @@
 import { signIn, signOut } from "@/auth";
 import { db } from "@/db";
 import { users } from "@/db/schema";
+import { sendVerificationMail } from "@/lib/mail";
 import { actionClient } from "@/lib/safe-action";
 import { findUserByEmail } from "@/lib/user-queries";
 import { SigninSchema, SignupSchema } from "@/lib/validation";
+import { createVerificationToken } from "@/lib/verification-queries";
 import bcrypt from "bcryptjs";
 
 export const credentialsSigninAction = actionClient
@@ -38,8 +40,6 @@ export const credentialsSignupAction = actionClient
 
       if (existingUser) throw new Error("User signup failed");
 
-      // TODO: Send confirmation email
-
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const [user] = await db
@@ -52,6 +52,13 @@ export const credentialsSignupAction = actionClient
         .returning();
 
       if (!user) throw new Error("User signup failed");
+
+      const verificationToken = await createVerificationToken(email);
+
+      await sendVerificationMail(
+        verificationToken.identifier,
+        verificationToken.token,
+      );
     },
   );
 
