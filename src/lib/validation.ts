@@ -15,13 +15,7 @@ export type SigninType = z.infer<typeof SigninSchema>;
 
 export const SignupSchema = SigninSchema.extend({
   name: z.string().min(1, "Name is required"),
-  confirmPassword: z
-    .string()
-    .min(1, "Confirm Password is required")
-    .regex(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-      "Password must be at least 8 characters long and contain at least one letter and one number",
-    ),
+  confirmPassword: z.string().min(1, "Confirm Password is required"),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords do not match",
   path: ["confirmPassword"],
@@ -45,13 +39,7 @@ export const PasswordResetSchema = z
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
         "Password must be at least 8 characters long and contain at least one letter and one number",
       ),
-    confirmPassword: z
-      .string()
-      .min(1, "Confirm Password is required")
-      .regex(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-        "Password must be at least 8 characters long and contain at least one letter and one number",
-      ),
+    confirmPassword: z.string().min(1, "Confirm Password is required"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
