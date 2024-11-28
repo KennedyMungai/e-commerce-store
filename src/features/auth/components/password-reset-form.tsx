@@ -21,7 +21,6 @@ import { passwordResetAction } from "@/features/auth/actions/auth-actions";
 import { PasswordResetSchema, PasswordResetType } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
-import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -29,7 +28,7 @@ const PasswordResetForm = () => {
   const { execute, isPending } = useAction(passwordResetAction, {
     onSuccess: () => {
       toast.success("Password reset successful");
-      redirect("/signin");
+      window.location.href = "/signin";
     },
     onError: () => toast.error("Something went wrong, please try again"),
   });
