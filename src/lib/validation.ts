@@ -36,7 +36,7 @@ export const PasswordResetSchema = z
       .string()
       .min(1, "Password is required")
       .regex(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/,
         "Use a stronger password",
       ),
     confirmPassword: z.string().min(1, "Confirm Password is required"),
