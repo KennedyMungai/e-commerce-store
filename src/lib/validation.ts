@@ -7,7 +7,7 @@ export const SigninSchema = z.object({
     .min(1, "Password is required")
     .regex(
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/,
-      "Password must be at least 8 characters long and contain at least one letter, one number, and one special character",
+      "Use a stronger password",
     ),
 });
 
@@ -37,7 +37,7 @@ export const PasswordResetSchema = z
       .min(1, "Password is required")
       .regex(
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-        "Password must be at least 8 characters long and contain at least one letter and one number",
+        "Use a stronger password",
       ),
     confirmPassword: z.string().min(1, "Confirm Password is required"),
   })
