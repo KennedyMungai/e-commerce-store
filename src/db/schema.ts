@@ -97,3 +97,19 @@ export const authenticators = pgTable(
     }),
   }),
 );
+
+export const PasswordResetToken = pgTable(
+  "passwordResetToken",
+  {
+    email: varchar("email", { length: 256 }).notNull(),
+    token: varchar("token", { length: 256 }).notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull(),
+  },
+  (table) => {
+    return {
+      compositeKey: primaryKey({
+        columns: [table.email, table.token],
+      }),
+    };
+  },
+);
