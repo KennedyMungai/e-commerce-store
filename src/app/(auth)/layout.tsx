@@ -7,8 +7,8 @@ type Props = {
 
 const AuthLayout = ({ children }: Props) => {
   return (
-    <div className="h-full lg:grid lg:grid-cols-2">
-      <div className="hidden flex-col items-center justify-center gap-4 bg-blue-300 lg:flex">
+    <div className="h-full md:grid md:grid-cols-2">
+      <div className="hidden flex-col items-center justify-center gap-4 bg-blue-300 md:flex">
         <Image src="/logo.svg" alt="Logo" width={200} height={200} />
         <p className="text-3xl font-semibold text-white">E Commerce Store</p>
       </div>
