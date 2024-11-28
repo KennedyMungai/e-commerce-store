@@ -94,9 +94,11 @@ export const passwordResetAction = actionClient
   .action(async ({ parsedInput: { email, password, confirmPassword } }) => {
     if (password !== confirmPassword) throw new Error("Passwords do not match");
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const [updatedUser] = await db
       .update(users)
-      .set({ password })
+      .set({ password: hashedPassword })
       .where(eq(users.email, email))
       .returning();
 
