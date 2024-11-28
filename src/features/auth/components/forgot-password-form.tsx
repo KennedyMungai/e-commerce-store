@@ -19,9 +19,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { ForgotPasswordSchema, ForgotPasswordType } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { forgotPasswordAction } from "../actions/auth-actions";
 
 const ForgotPasswordForm = () => {
+  const { execute, isPending } = useAction(forgotPasswordAction, {
+    onSuccess: () => toast.success("Reset password link sent"),
+    onError: () => toast.error("Something happened. Please try again"),
+  });
+
   const form = useForm<ForgotPasswordType>({
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
@@ -29,7 +37,11 @@ const ForgotPasswordForm = () => {
     },
   });
 
-  const onSubmit = (values: ForgotPasswordType) => console.log(values);
+  const onSubmit = (values: ForgotPasswordType) => {
+    execute(values);
+
+    form.reset();
+  };
 
   return (
     <Card className="min-w-[600px]">
@@ -49,13 +61,22 @@ const ForgotPasswordForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Email" />
+                    <Input
+                      {...field}
+                      placeholder="Email"
+                      type="email"
+                      disabled={form.formState.isSubmitting || isPending}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className="w-full" type="submit">
+            <Button
+              className="w-full"
+              type="submit"
+              disabled={form.formState.isSubmitting || isPending}
+            >
               Send Confirmation Email
             </Button>
           </form>
