@@ -17,11 +17,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { passwordResetAction } from "@/features/auth/actions/auth-actions";
 import { PasswordResetSchema, PasswordResetType } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "next-safe-action/hooks";
+import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const PasswordResetForm = () => {
+  const { execute, isPending } = useAction(passwordResetAction, {
+    onSuccess: () => {
+      toast.success("Password reset successful");
+      redirect("/signin");
+    },
+    onError: () => toast.error("Something went wrong, please try again"),
+  });
+
   const form = useForm<PasswordResetType>({
     resolver: zodResolver(PasswordResetSchema),
     defaultValues: {
@@ -31,7 +43,11 @@ const PasswordResetForm = () => {
     },
   });
 
-  const onSubmit = (values: PasswordResetType) => console.log(values);
+  const onSubmit = (values: PasswordResetType) => {
+    execute(values);
+
+    form.reset();
+  };
 
   return (
     <Card className="min-w-[600px]">
@@ -51,7 +67,12 @@ const PasswordResetForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Email" type="email" />
+                    <Input
+                      {...field}
+                      placeholder="Email"
+                      type="email"
+                      disabled={isPending || form.formState.isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -64,7 +85,12 @@ const PasswordResetForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Password" type="password" />
+                    <Input
+                      {...field}
+                      placeholder="Password"
+                      type="password"
+                      disabled={isPending || form.formState.isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,13 +107,18 @@ const PasswordResetForm = () => {
                       {...field}
                       placeholder="Confirm Password"
                       type="password"
+                      disabled={isPending || form.formState.isSubmitting}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isPending || form.formState.isSubmitting}
+            >
               Reset Password
             </Button>
           </form>

@@ -9,11 +9,13 @@ import { actionClient } from "@/lib/safe-action";
 import { findUserByEmail } from "@/lib/user-queries";
 import {
   ForgotPasswordSchema,
+  PasswordResetSchema,
   SigninSchema,
   SignupSchema,
 } from "@/lib/validation";
 import { createVerificationToken } from "@/lib/verification-queries";
 import bcrypt from "bcryptjs";
+import { eq } from "drizzle-orm";
 
 export const credentialsSigninAction = actionClient
   .schema(SigninSchema)
@@ -85,4 +87,18 @@ export const forgotPasswordAction = actionClient
     const resetToken = await generatePasswordResetToken(existingUser.email!);
 
     await sendPasswordResetMail(resetToken.email, resetToken.token);
+  });
+
+export const passwordResetAction = actionClient
+  .schema(PasswordResetSchema)
+  .action(async ({ parsedInput: { email, password, confirmPassword } }) => {
+    if (password !== confirmPassword) throw new Error("Passwords do not match");
+
+    const [updatedUser] = await db
+      .update(users)
+      .set({ password })
+      .where(eq(users.email, email))
+      .returning();
+
+    if (!updatedUser) throw new Error("Password reset failed");
   });
