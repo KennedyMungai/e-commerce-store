@@ -10,6 +10,7 @@ import {
 import { SelectCategoryType } from "@/db/schema";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDownIcon, MoreVerticalIcon } from "lucide-react";
+import Link from "next/link";
 
 export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
   {
@@ -23,6 +24,13 @@ export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
           Name
           <ArrowUpDownIcon className="ml-2 h-4 w-4" />
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const { name } = row.original;
+
+      return (
+        <Link href={`/dashboard/categories/${row.original.id}`}>{name}</Link>
       );
     },
   },
