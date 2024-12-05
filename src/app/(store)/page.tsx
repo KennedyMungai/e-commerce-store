@@ -1,11 +1,5 @@
-import UserButton from "@/features/auth/components/user-button";
-
 const HomePage = () => {
-  return (
-    <div>
-      <UserButton />
-    </div>
-  );
+  return <main></main>;
 };
 
 export default HomePage;
