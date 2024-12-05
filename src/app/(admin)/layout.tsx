@@ -1,4 +1,5 @@
 import AdminSidebar from "@/components/admin-sidebar";
+import AdminTopbar from "@/components/admin-topbar";
 import { ReactNode } from "react";
 
 type Props = {
@@ -9,7 +10,10 @@ const DashboardLayout = ({ children }: Props) => {
   return (
     <div className="flex h-full">
       <AdminSidebar />
-      {children}
+      <div className="size-full">
+        <AdminTopbar />
+        {children}
+      </div>
     </div>
   );
 };
