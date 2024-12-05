@@ -9,6 +9,7 @@
 			"neondatabase",
 			"postgis",
 			"sonner",
+			"srid",
 			"superadmin",
 			"turbopack"
 		]
