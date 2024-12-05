@@ -24,10 +24,15 @@ import { SigninSchema, SigninType } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-const SigninForm = () => {
+type Props = {
+  error?: string;
+};
+
+const SigninForm = ({ error }: Props) => {
   const { execute, isPending } = useAction(credentialsSigninAction, {
     onSuccess: () => toast.success("Sign in successful"),
     onError: () => toast.error("Something went wrong, please try again"),
@@ -41,11 +46,22 @@ const SigninForm = () => {
     },
   });
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
+
+  if (error) {
+    toast.error(error);
+    window.location.href = "/signin";
+  }
+
   const onSubmit = (values: SigninType) => {
     execute(values);
 
     form.reset();
   };
+
+  if (!isMounted) return null;
 
   return (
     <Card className="max-w-[400px]">

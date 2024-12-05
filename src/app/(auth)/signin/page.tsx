@@ -1,7 +1,15 @@
 import SigninForm from "@/features/auth/components/signin-form";
 
-const SigninPage = () => {
-  return <SigninForm />;
+type Props = {
+  searchParams: {
+    error?: string;
+  };
+};
+
+const SigninPage = async ({ searchParams }: Props) => {
+  const { error } = await searchParams;
+
+  return <SigninForm error={error} />;
 };
 
 export default SigninPage;
