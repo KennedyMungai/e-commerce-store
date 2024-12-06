@@ -3,14 +3,14 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Input } from "@/components/ui/input";
 import UserButton from "@/features/auth/components/user-button";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { HeadsetIcon } from "lucide-react";
 
 const StoreNavbar = () => {
-  const session = useSession();
+  // const session = useSession();
 
   return (
     <nav className="h-14 border-b">

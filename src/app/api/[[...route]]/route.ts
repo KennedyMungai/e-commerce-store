@@ -8,6 +8,8 @@ import { initAuthConfig } from "@hono/auth-js";
 export const runtime = "nodejs";
 
 const getAuthConfig = (): AuthConfig => {
+  // FIXME: Find a way to fix the type error.
+  // @ts-expect-error Type error.
   return {
     secret: process.env.AUTH_SECRET!,
     ...authConfig,
