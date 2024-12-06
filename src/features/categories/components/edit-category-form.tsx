@@ -16,17 +16,15 @@ import { useForm } from "react-hook-form";
 
 type Props = {
   id: string;
-  name: string;
-  description: string;
 };
 
-const EditCategoryForm = ({ id, name, description }: Props) => {
+const EditCategoryForm = ({ id }: Props) => {
   const form = useForm<InsertCategoryType>({
     resolver: zodResolver(InsertCategorySchema),
     // TODO: Use values from the table as the defaults
     defaultValues: {
-      name,
-      description,
+      name: "",
+      description: "",
     },
   });
 

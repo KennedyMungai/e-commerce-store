@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,16 +9,25 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import EditCategoryForm from "@/features/categories/components/edit-category-form";
+import { useEditCategoryDialog } from "@/features/categories/hooks/use-edit-category-dialog";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-type Props = {
-  id: string;
-  name: string;
-  description: string;
-};
+const EditCategoryDialog = () => {
+  const params = useSearchParams();
 
-const EditCategoryDialog = ({ id, name, description }: Props) => {
+  const { isOpen, setIsOpen } = useEditCategoryDialog({
+    id: params.get("id") ?? "",
+  });
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
+
+  if (!isMounted) return null;
+
   return (
-    <Dialog modal={false}>
+    <Dialog open={!!isOpen} onOpenChange={() => setIsOpen("")} modal={false}>
       <DialogTrigger asChild>
         <Button variant={"outline"}>Edit Category</Button>
       </DialogTrigger>
@@ -25,7 +36,7 @@ const EditCategoryDialog = ({ id, name, description }: Props) => {
           <DialogTitle>Edit Category</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
-          <EditCategoryForm id={id} name={name} description={description} />
+          <EditCategoryForm id={params.get("id") ?? ""} />
         </div>
       </DialogContent>
     </Dialog>
