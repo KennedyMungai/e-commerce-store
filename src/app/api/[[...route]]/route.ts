@@ -1,9 +1,10 @@
+import authConfig from "@/auth.config";
+import { categories } from "@/features/categories/server/categories";
+import { products } from "@/features/products/server/products";
+import { AuthConfig } from "@auth/core";
+import { initAuthConfig } from "@hono/auth-js";
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
-import categories from "@/features/categories/server/categories";
-import { AuthConfig } from "@auth/core";
-import authConfig from "@/auth.config";
-import { initAuthConfig } from "@hono/auth-js";
 
 export const runtime = "nodejs";
 
@@ -19,7 +20,8 @@ const getAuthConfig = (): AuthConfig => {
 const app = new Hono()
   .basePath("/api")
   .use("*", initAuthConfig(getAuthConfig))
-  .route("/categories", categories);
+  .route("/categories", categories)
+  .route("/products", products);
 
 export const GET = handle(app);
 export const POST = handle(app);
