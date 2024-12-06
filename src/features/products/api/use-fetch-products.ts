@@ -1,14 +1,25 @@
 import { client } from "@/lib/hc";
 import { useQuery } from "@tanstack/react-query";
-import { InferResponseType } from "hono";
+import { InferRequestType, InferResponseType } from "hono";
 
-type ResponseType = InferResponseType<typeof client.api.products.$get, 200>;
+type ResponseType = InferResponseType<
+  (typeof client.api.products)[":categoryId"]["$get"],
+  200
+>;
 
-export const useFetchProducts = () =>
-  useQuery<ResponseType, Error>({
+type RequestType = InferRequestType<
+  (typeof client.api.products)[":categoryId"]["$get"]
+>;
+
+export const useFetchProducts = (categoryId: string) =>
+  useQuery<ResponseType, Error, RequestType>({
     queryKey: ["products"],
     queryFn: async () => {
-      const response = await client.api.products.$get();
+      const response = await client.api.products[":categoryId"]["$get"]({
+        param: {
+          categoryId,
+        },
+      });
 
       if (!response.ok) throw new Error("Failed to fetch products");
 
