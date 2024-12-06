@@ -1,9 +1,23 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
+import categories from "@/features/categories/server/categories";
+import { AuthConfig } from "@auth/core";
+import authConfig from "@/auth.config";
+import { initAuthConfig } from "@hono/auth-js";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
-const app = new Hono().basePath("/api");
+const getAuthConfig = (): AuthConfig => {
+  return {
+    secret: process.env.AUTH_SECRET!,
+    ...authConfig,
+  };
+};
+
+const app = new Hono()
+  .basePath("/api")
+  .use("*", initAuthConfig(getAuthConfig))
+  .route("/categories", categories);
 
 export const GET = handle(app);
 export const POST = handle(app);
