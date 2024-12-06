@@ -167,6 +167,18 @@ export const ProductRelations = relations(Product, ({ many, one }) => ({
   wishlists: many(WishList),
 }));
 
+export const InsertProductSchema = createInsertSchema(Product).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertProductType = z.infer<typeof InsertProductSchema>;
+
+export const SelectProductSchema = createSelectSchema(Product);
+
+export type SelectProductType = z.infer<typeof SelectProductSchema>;
+
 export const Category = pgTable("categories", {
   id: uuid("id").defaultRandom().primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
