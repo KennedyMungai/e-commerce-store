@@ -1,11 +1,13 @@
+import "@/app/globals.css";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
-import "@/app/globals.css";
+import ClientProviders from "@/providers/client-providers";
+import QueryProvider from "@/providers/query-provider";
+import ThemeProvider from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import localFont from "next/font/local";
-import ThemeProvider from "@/providers/theme-provider";
-import QueryProvider from "@/providers/query-provider";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,7 +21,10 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "E-commerce Store",
+  title: {
+    template: "%s - E Commerce Store",
+    default: "E Commerce Store",
+  },
   description: "A simple E-Commerce Store",
 };
 
@@ -38,7 +43,10 @@ export default async function RootLayout({
         >
           <ThemeProvider>
             <QueryProvider>
-              {children}
+              <NuqsAdapter>
+                {children}
+                <ClientProviders />
+              </NuqsAdapter>
               <Toaster />
             </QueryProvider>
           </ThemeProvider>
