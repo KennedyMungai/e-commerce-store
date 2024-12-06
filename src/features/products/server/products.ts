@@ -51,34 +51,11 @@ export const products = new Hono()
     zValidator("json", InsertProductSchema),
     async (c) => {
       const auth = c.get("authUser");
-      const {
-        description,
-        image_url,
-        name,
-        price,
-        category_id,
-        colors,
-        sizes,
-        quantity,
-        supplier_id,
-      } = c.req.valid("json");
+      const products = c.req.valid("json");
 
       if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
 
-      const [data] = await db
-        .insert(Product)
-        .values({
-          description,
-          image_url,
-          name,
-          price,
-          category_id,
-          colors,
-          sizes,
-          quantity,
-          supplier_id,
-        })
-        .returning();
+      const [data] = await db.insert(Product).values(products).returning();
 
       if (!data) return c.json({ error: "Failed to create product" }, 400);
 
@@ -93,33 +70,13 @@ export const products = new Hono()
     async (c) => {
       const auth = c.get("authUser");
       const { id } = c.req.valid("param");
-      const {
-        description,
-        image_url,
-        name,
-        price,
-        category_id,
-        colors,
-        quantity,
-        sizes,
-        supplier_id,
-      } = c.req.valid("json");
+      const products = c.req.valid("json");
 
       if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
 
       const [data] = await db
         .update(Product)
-        .set({
-          description,
-          image_url,
-          name,
-          price,
-          category_id,
-          colors,
-          quantity,
-          sizes,
-          supplier_id,
-        })
+        .set(products)
         .where(eq(Product.id, id))
         .returning();
 
