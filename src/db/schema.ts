@@ -167,11 +167,20 @@ export const ProductRelations = relations(Product, ({ many, one }) => ({
   wishlists: many(WishList),
 }));
 
-export const InsertProductSchema = createInsertSchema(Product).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
+export const InsertProductSchema = createInsertSchema(Product)
+  .omit({
+    id: true,
+    createdAt: true,
+    updatedAt: true,
+  })
+  .extend({
+    colors: z
+      .union([z.string(), z.array(z.string())])
+      .transform((value) => (Array.isArray(value) ? value : [value])),
+    sizes: z
+      .union([z.string(), z.array(z.string())])
+      .transform((value) => (Array.isArray(value) ? value : [value])),
+  });
 
 export type InsertProductType = z.infer<typeof InsertProductSchema>;
 
