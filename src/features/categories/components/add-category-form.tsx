@@ -8,7 +8,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { InsertCategorySchema, InsertCategoryType } from "@/db/schema";
+import { useCreateCategory } from "@/features/categories/api/use-create-category";
+import { useAddCategoryDialog } from "@/features/categories/hooks/use-add-category-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -21,8 +24,21 @@ const AddCategoryForm = () => {
     },
   });
 
+  const { mutate, isPending } = useCreateCategory();
+
+  const { close } = useAddCategoryDialog();
+
   const handleSubmit = (values: InsertCategoryType) => {
-    console.log(values);
+    mutate(
+      { json: values },
+      {
+        onSuccess: () => {
+          form.reset();
+
+          close();
+        },
+      },
+    );
   };
 
   return (
@@ -35,7 +51,11 @@ const AddCategoryForm = () => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Category Name" />
+                <Input
+                  {...field}
+                  placeholder="Category Name"
+                  disabled={form.formState.isSubmitting || isPending}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -48,13 +68,22 @@ const AddCategoryForm = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Category Description" />
+                <Textarea
+                  {...field}
+                  placeholder="Category Description"
+                  rows={4}
+                  disabled={form.formState.isSubmitting || isPending}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="mt-4 w-full">
+        <Button
+          type="submit"
+          className="mt-4 w-full"
+          disabled={form.formState.isSubmitting || isPending}
+        >
           Create Category
         </Button>
       </form>

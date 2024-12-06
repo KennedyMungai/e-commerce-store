@@ -37,6 +37,9 @@ export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
   {
     accessorKey: "description",
     header: "Description",
+    cell: ({ row }) => (
+      <div className="line-clamp-2 truncate">{row.original.description}</div>
+    ),
   },
   {
     id: "actions",
