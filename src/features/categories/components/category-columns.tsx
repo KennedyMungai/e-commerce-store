@@ -33,7 +33,7 @@ export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
 
       return (
         <Link
-          href={`/dashboard/categories/${id}`}
+          href={`/dashboard/categories/category/${id}`}
           className="cursor-pointer hover:underline"
         >
           {name}

@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 const AdminTopbar = () => {
   const pathname = usePathname();
 
+  const pathItems = pathname.split("/");
+
   const { setIsOpen } = useAddCategoryDialog();
 
   const [isMounted, setIsMounted] = useState(false);
@@ -24,9 +26,7 @@ const AdminTopbar = () => {
 
   return (
     <div className="flex h-14 w-full items-center justify-between border-b p-4">
-      <h3 className="text-2xl capitalize">
-        {pathname.split("/")[2] ?? "dashboard"}
-      </h3>
+      <h3 className="text-2xl capitalize">{pathItems[2] ?? "dashboard"}</h3>
       <div className="flex items-center gap-4">
         {pathname !== "/dashboard" && (
           <Button variant={"outline"} size="icon" onClick={handleClick}>
