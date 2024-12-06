@@ -27,10 +27,15 @@ export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
       );
     },
     cell: ({ row }) => {
-      const { name } = row.original;
+      const { name, id } = row.original;
 
       return (
-        <Link href={`/dashboard/categories/${row.original.id}`}>{name}</Link>
+        <Link
+          href={`/dashboard/categories/${id}`}
+          className="cursor-pointer hover:underline"
+        >
+          {name}
+        </Link>
       );
     },
   },
