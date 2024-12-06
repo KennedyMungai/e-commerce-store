@@ -1,21 +1,19 @@
 import { client } from "@/lib/hc";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { InferResponseType } from "hono";
 
 type ResponseType = InferResponseType<typeof client.api.categories.$get, 200>;
 
 export const useFetchCategories = () =>
-  useInfiniteQuery<ResponseType, Error>({
-    initialPageParam: 1,
+  useQuery<ResponseType, Error>({
     queryKey: ["categories"],
-    getNextPageParam: (lastPage) => lastPage.nextPage,
-    queryFn: async ({ pageParam }) => {
-      const response = await client.api.categories.$get({
-        query: { page: pageParam as string, limit: "10" },
-      });
+    queryFn: async () => {
+      const response = await client.api.categories.$get();
 
       if (!response.ok) throw new Error("Failed to fetch categories");
 
-      return await response.json();
+      const { data } = await response.json();
+
+      return data;
     },
   });

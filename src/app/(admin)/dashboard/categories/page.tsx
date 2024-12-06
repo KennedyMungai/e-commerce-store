@@ -1,14 +1,7 @@
-import { DataTable } from "@/components/data-table";
-import { CategoryColumns } from "@/features/categories/components/category-columns";
+import CategoriesTable from "@/features/categories/components/categories-table";
 
 const CategoriesPage = () => {
-  return (
-    <div className="h-full">
-      <div className="p-4">
-        <DataTable columns={CategoryColumns} data={[]} />
-      </div>
-    </div>
-  );
+  return <CategoriesTable />;
 };
 
 export default CategoriesPage;
