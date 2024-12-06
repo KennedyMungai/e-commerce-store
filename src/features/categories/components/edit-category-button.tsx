@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useEditCategoryDialog } from "@/features/categories/hooks/use-edit-category-dialog";
+import { PencilIcon } from "lucide-react";
 
 type Props = {
   id: string;
@@ -20,7 +21,7 @@ const EditCategoryButton = ({ id }: Props) => {
         console.log(id);
       }}
     >
-      Edit Category
+      <PencilIcon className="size-5" />
     </Button>
   );
 };

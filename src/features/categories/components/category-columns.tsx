@@ -12,6 +12,7 @@ import EditCategoryButton from "@/features/categories/components/edit-category-b
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDownIcon, MoreVerticalIcon } from "lucide-react";
 import Link from "next/link";
+import DeleteCategoryButton from "./delete-category-button";
 
 export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
   {
@@ -60,10 +61,12 @@ export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="space-y-2">
-            <DropdownMenuItem className="cursor-pointer p-0">
+            <DropdownMenuItem className="flex cursor-pointer justify-center p-0">
               <EditCategoryButton id={id} />
             </DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem className="flex cursor-pointer justify-center p-0">
+              <DeleteCategoryButton id={id} />
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
