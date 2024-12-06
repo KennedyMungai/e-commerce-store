@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SelectCategoryType } from "@/db/schema";
+import EditCategoryDialog from "@/features/categories/components/edit-category-dialog";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDownIcon, MoreVerticalIcon } from "lucide-react";
 import Link from "next/link";
@@ -49,7 +50,7 @@ export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const { id } = row.original;
+      const { id, name, description } = row.original;
 
       return (
         <DropdownMenu>
@@ -59,7 +60,13 @@ export const CategoryColumns: ColumnDef<SelectCategoryType>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <DropdownMenuItem>
+              <EditCategoryDialog
+                id={id}
+                name={name}
+                description={description}
+              />
+            </DropdownMenuItem>
             <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
