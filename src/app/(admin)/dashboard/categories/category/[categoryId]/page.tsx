@@ -1,3 +1,5 @@
+import CategoryDetails from "@/features/categories/components/category-details";
+
 type Props = {
   params: {
     categoryId: string;
@@ -7,7 +9,7 @@ type Props = {
 const CategoryPage = async ({ params }: Props) => {
   const { categoryId } = await params;
 
-  return <div>{categoryId}</div>;
+  return <CategoryDetails id={categoryId} />;
 };
 
 export default CategoryPage;
