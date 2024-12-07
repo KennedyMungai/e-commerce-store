@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -114,6 +115,7 @@ const AddProductForm = () => {
             </FormItem>
           )}
         />
+        {/* TODO: Updated the logic to autofill or select the correct values */}
         <FormField
           control={form.control}
           name="sizes"
@@ -140,8 +142,13 @@ const AddProductForm = () => {
                     );
                   }}
                   value={field.value ? field.value.join(",") : ""}
+                  autoComplete="on"
                 />
               </FormControl>
+              <FormDescription>
+                Available Sizes: &quot;XS, S, M, L, XL, XXL, XXXL&quot;
+              </FormDescription>
+              <FormMessage />
             </FormItem>
           )}
         />
