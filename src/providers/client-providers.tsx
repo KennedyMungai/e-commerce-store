@@ -2,6 +2,7 @@
 
 import AddCategoryDialog from "@/features/categories/components/add-category-dialog";
 import EditCategoryDialog from "@/features/categories/components/edit-category-dialog";
+import AddProductDialog from "@/features/products/components/add-product-dialog";
 import { useEffect, useState } from "react";
 
 const ClientProviders = () => {
@@ -15,6 +16,7 @@ const ClientProviders = () => {
     <>
       <AddCategoryDialog />
       <EditCategoryDialog />
+      <AddProductDialog />
     </>
   );
 };

@@ -24,6 +24,8 @@ export const ShippingMethods = pgEnum("shipping_method", [
   "express",
 ]);
 
+export const SizeEnum = z.enum(["XS", "S", "M", "L", "XL", "XXL", "XXXL"]);
+
 export const users = pgTable(
   "user",
   {
@@ -182,7 +184,7 @@ export const InsertProductSchema = createInsertSchema(Product)
       .union([z.string(), z.array(z.string())])
       .transform((value) => (Array.isArray(value) ? value : [value])),
     sizes: z
-      .union([z.string(), z.array(z.string())])
+      .union([SizeEnum, z.array(SizeEnum)])
       .transform((value) => (Array.isArray(value) ? value : [value])),
   });
 

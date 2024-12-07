@@ -3,6 +3,7 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { useAddCategoryDialog } from "@/features/categories/hooks/use-add-category-dialog";
+import { useAddProductDialog } from "@/features/products/hooks/use-add-product-dialog";
 import { PlusIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,6 +12,7 @@ const AdminTopbar = () => {
   const pathname = usePathname();
 
   const { setIsOpen: openCategoryModal } = useAddCategoryDialog();
+  const { setIsOpen: openProductModal } = useAddProductDialog();
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -36,7 +38,11 @@ const AdminTopbar = () => {
           </Button>
         )}
         {pathname.startsWith("/dashboard/categories/category") && (
-          <Button variant={"outline"} size="icon">
+          <Button
+            variant={"outline"}
+            size="icon"
+            onClick={() => openProductModal(true)}
+          >
             <PlusIcon className="size-5" />
           </Button>
         )}

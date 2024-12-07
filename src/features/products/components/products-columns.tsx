@@ -66,4 +66,17 @@ export const ProductsColumns: ColumnDef<SelectProductType>[] = [
     accessorKey: "image_url",
     header: "Image",
   },
+  {
+    id: "Supplier",
+    header: "Supplier",
+    cell: ({ row }) => {
+      const { supplier_id } = row.original;
+
+      return <div>{supplier_id}</div>;
+    },
+  },
+  {
+    id: "actions",
+    header: "Actions",
+  },
 ];
