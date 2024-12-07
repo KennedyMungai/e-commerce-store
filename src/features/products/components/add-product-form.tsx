@@ -169,6 +169,7 @@ const AddProductForm = () => {
             <FormItem>
               <FormLabel>Supplier</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
+                {/* TODO: Fetch the supplier's data and map it to the select */}
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select the product supplier" />
