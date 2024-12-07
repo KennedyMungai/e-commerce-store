@@ -143,12 +143,16 @@ export const Product = pgTable("products", {
   sizes: text("colors")
     .array()
     .default(sql`ARRAY[]::text[]`),
-  supplier_id: uuid("supplier_id").references(() => Supplier.id, {
-    onDelete: "cascade",
-  }),
-  category_id: uuid("category_id").references(() => Category.id, {
-    onDelete: "cascade",
-  }),
+  supplier_id: uuid("supplier_id")
+    .references(() => Supplier.id, {
+      onDelete: "cascade",
+    })
+    .notNull(),
+  category_id: uuid("category_id")
+    .references(() => Category.id, {
+      onDelete: "cascade",
+    })
+    .notNull(),
   quantity: integer("quantity").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
