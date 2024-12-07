@@ -1,6 +1,7 @@
 import authConfig from "@/auth.config";
 import { categories } from "@/features/categories/server/categories";
 import { products } from "@/features/products/server/products";
+import { suppliers } from "@/features/suppliers/server/suppliers";
 import { AuthConfig } from "@auth/core";
 import { initAuthConfig } from "@hono/auth-js";
 import { Hono } from "hono";
@@ -21,7 +22,8 @@ const app = new Hono()
   .basePath("/api")
   .use("*", initAuthConfig(getAuthConfig))
   .route("/categories", categories)
-  .route("/products", products);
+  .route("/products", products)
+  .route("/suppliers", suppliers);
 
 export const GET = handle(app);
 export const POST = handle(app);
