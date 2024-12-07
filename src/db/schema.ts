@@ -136,7 +136,7 @@ export const Product = pgTable("products", {
   name: varchar("name", { length: 256 }).notNull(),
   description: text("description").notNull(),
   price: decimal("price").notNull(),
-  image_url: varchar("image_url", { length: 256 }).notNull(),
+  image_url: varchar("image_url", { length: 256 }),
   colors: text("colors")
     .array()
     .default(sql`ARRAY[]::text[]`),
