@@ -92,6 +92,12 @@ const AddProductForm = () => {
                   {...field}
                   placeholder="Product Quantity"
                   type="number"
+                  min={0}
+                  onChange={(e) => {
+                    const value =
+                      e.target.value === "" ? 0 : parseInt(e.target.value);
+                    form.setValue("quantity", value);
+                  }}
                 />
               </FormControl>
               <FormMessage />
