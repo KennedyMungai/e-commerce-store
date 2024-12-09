@@ -51,7 +51,7 @@ const AddProductForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="h-[60rem] space-y-4 overflow-y-auto p-4"
+        className="h-full space-y-4 overflow-y-auto p-4"
       >
         <FormField
           control={form.control}
