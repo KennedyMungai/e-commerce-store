@@ -25,6 +25,7 @@ const AdminTopbar = () => {
       <h3 className="text-2xl capitalize">
         {pathname === "/dashboard" && "Dashboard"}
         {pathname === "/dashboard/categories" && "Categories"}
+        {pathname === "/dashboard/suppliers" && "Suppliers"}
         {pathname.startsWith("/dashboard/categories/category") && "Category"}
       </h3>
       <div className="flex items-center gap-4">
@@ -42,6 +43,15 @@ const AdminTopbar = () => {
             variant={"outline"}
             size="icon"
             onClick={() => openProductModal(true)}
+          >
+            <PlusIcon className="size-5" />
+          </Button>
+        )}
+        {pathname === "/dashboard/suppliers" && (
+          <Button
+            variant={"outline"}
+            size="icon"
+            // onClick={() => openProductModal(true)}
           >
             <PlusIcon className="size-5" />
           </Button>
