@@ -47,6 +47,8 @@ const AddProductForm = () => {
     console.log(values);
   };
 
+  // TODO: Make the add product form scrollable
+
   return (
     <Form {...form}>
       <form
