@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import UserButton from "@/features/auth/components/user-button";
-import { BoxIcon, TruckIcon } from "lucide-react";
+import { BoxIcon, MapIcon, TruckIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,6 +17,11 @@ const links = [
     name: "Suppliers",
     href: "/dashboard/suppliers",
     icon: TruckIcon,
+  },
+  {
+    name: "Orders",
+    href: "/dashboard/orders",
+    icon: MapIcon,
   },
 ];
 

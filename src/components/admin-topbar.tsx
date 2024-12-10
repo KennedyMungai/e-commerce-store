@@ -28,6 +28,7 @@ const AdminTopbar = () => {
         {pathname === "/dashboard" && "Dashboard"}
         {pathname === "/dashboard/categories" && "Categories"}
         {pathname === "/dashboard/suppliers" && "Suppliers"}
+        {pathname === "/dashboard/orders" && "Orders"}
         {pathname.startsWith("/dashboard/categories/category") && "Category"}
         {pathname.startsWith("/dashboard/suppliers/supplier") && "Supplier"}
       </h3>
