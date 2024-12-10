@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { InsertProductSchema, InsertProductType, SizeEnum } from "@/db/schema";
+import { useFetchSuppliers } from "@/features/suppliers/api/use-fetch-suppliers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -25,6 +26,8 @@ import { z } from "zod";
 
 const AddProductForm = () => {
   const pathname = usePathname();
+
+  const { data: suppliersData } = useFetchSuppliers();
 
   const category_id = pathname.split("/")[4];
 
@@ -184,14 +187,18 @@ const AddProductForm = () => {
             <FormItem>
               <FormLabel>Supplier</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-                {/* TODO: Fetch the supplier's data and map it to the select */}
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select the product supplier" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="1">Supplier 1</SelectItem>
+                  {/* TODO: Implement the loading and error states */}
+                  {suppliersData?.data.map((supplier) => (
+                    <SelectItem value={supplier.id} key={supplier.id}>
+                      {supplier.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage />
