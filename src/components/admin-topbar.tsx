@@ -4,6 +4,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { useAddCategoryDialog } from "@/features/categories/hooks/use-add-category-dialog";
 import { useAddProductDialog } from "@/features/products/hooks/use-add-product-dialog";
+import { useAddSupplierDialog } from "@/features/suppliers/hooks/use-add-supplier-dialog";
 import { PlusIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,8 +12,9 @@ import { useEffect, useState } from "react";
 const AdminTopbar = () => {
   const pathname = usePathname();
 
-  const { setIsOpen: openCategoryModal } = useAddCategoryDialog();
-  const { setIsOpen: openProductModal } = useAddProductDialog();
+  const { open: openCategoryModal } = useAddCategoryDialog();
+  const { open: openProductModal } = useAddProductDialog();
+  const { open: openSupplierModal } = useAddSupplierDialog();
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -30,29 +32,17 @@ const AdminTopbar = () => {
       </h3>
       <div className="flex items-center gap-4">
         {pathname === "/dashboard/categories" && (
-          <Button
-            variant={"outline"}
-            size="icon"
-            onClick={() => openCategoryModal(true)}
-          >
+          <Button variant={"outline"} size="icon" onClick={openCategoryModal}>
             <PlusIcon className="size-5" />
           </Button>
         )}
         {pathname.startsWith("/dashboard/categories/category") && (
-          <Button
-            variant={"outline"}
-            size="icon"
-            onClick={() => openProductModal(true)}
-          >
+          <Button variant={"outline"} size="icon" onClick={openProductModal}>
             <PlusIcon className="size-5" />
           </Button>
         )}
         {pathname === "/dashboard/suppliers" && (
-          <Button
-            variant={"outline"}
-            size="icon"
-            // onClick={() => openProductModal(true)}
-          >
+          <Button variant={"outline"} size="icon" onClick={openSupplierModal}>
             <PlusIcon className="size-5" />
           </Button>
         )}

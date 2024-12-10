@@ -1,5 +1,11 @@
+import SuppliersTable from "@/features/suppliers/components/suppliers-table";
+
 const SuppliersPage = () => {
-  return <div>SuppliersPage</div>;
+  return (
+    <div className="p-4">
+      <SuppliersTable />
+    </div>
+  );
 };
 
 export default SuppliersPage;
