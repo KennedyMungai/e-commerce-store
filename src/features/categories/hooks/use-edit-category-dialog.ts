@@ -1,17 +1,13 @@
-import { parseAsString, useQueryState } from "nuqs";
+import { parseAsBoolean, useQueryState } from "nuqs";
 
-type Props = {
-  id: string;
-};
-
-export const useEditCategoryDialog = ({ id }: Props) => {
+export const useEditCategoryDialog = () => {
   const [isOpen, setIsOpen] = useQueryState(
     "editCategoryDialog",
-    parseAsString.withDefault("").withOptions({ clearOnDefault: true }),
+    parseAsBoolean.withDefault(false).withOptions({ clearOnDefault: true }),
   );
 
-  const open = () => setIsOpen(id);
-  const close = () => setIsOpen("");
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
 
   return {
     open,

@@ -9,18 +9,10 @@ type Props = {
 };
 
 const EditCategoryButton = ({ id }: Props) => {
-  const { open } = useEditCategoryDialog({ id });
+  const { open } = useEditCategoryDialog();
 
   return (
-    <Button
-      variant={"outline"}
-      className="w-full"
-      onClick={() => {
-        open();
-
-        console.log(id);
-      }}
-    >
+    <Button variant={"outline"} className="w-full" onClick={open}>
       <PencilIcon className="size-5" />
     </Button>
   );
