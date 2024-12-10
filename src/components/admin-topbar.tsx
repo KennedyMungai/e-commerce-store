@@ -29,6 +29,7 @@ const AdminTopbar = () => {
         {pathname === "/dashboard/categories" && "Categories"}
         {pathname === "/dashboard/suppliers" && "Suppliers"}
         {pathname.startsWith("/dashboard/categories/category") && "Category"}
+        {pathname.startsWith("/dashboard/suppliers/supplier") && "Supplier"}
       </h3>
       <div className="flex items-center gap-4">
         {pathname === "/dashboard/categories" && (
