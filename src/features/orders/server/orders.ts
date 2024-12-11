@@ -60,6 +60,7 @@ export const orders = new Hono()
     // TODO: Check the types
     const [data] = await db
       .insert(Order)
+      // TODO: Check the types and make updates
       .values({ user_id: auth.token.id as string, shippingMethod, location })
       .returning();
 
