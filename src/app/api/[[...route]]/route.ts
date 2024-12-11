@@ -1,5 +1,6 @@
 import authConfig from "@/auth.config";
 import { categories } from "@/features/categories/server/categories";
+import { orderItems } from "@/features/orderItems/server/order-items";
 import { orders } from "@/features/orders/server/orders";
 import { products } from "@/features/products/server/products";
 import { suppliers } from "@/features/suppliers/server/suppliers";
@@ -25,7 +26,8 @@ const app = new Hono()
   .route("/categories", categories)
   .route("/products", products)
   .route("/suppliers", suppliers)
-  .route("/orders", orders);
+  .route("/orders", orders)
+  .route("/orderItems", orderItems);
 
 export const GET = handle(app);
 export const POST = handle(app);
