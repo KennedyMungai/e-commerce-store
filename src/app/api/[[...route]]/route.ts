@@ -3,6 +3,7 @@ import { categories } from "@/features/categories/server/categories";
 import { comments } from "@/features/comments/server/comments";
 import { orderItems } from "@/features/orderItems/server/order-items";
 import { orders } from "@/features/orders/server/orders";
+import { productRating } from "@/features/productRating/server/product-rating";
 import { products } from "@/features/products/server/products";
 import { suppliers } from "@/features/suppliers/server/suppliers";
 import { AuthConfig } from "@auth/core";
@@ -29,7 +30,8 @@ const app = new Hono()
   .route("/suppliers", suppliers)
   .route("/orders", orders)
   .route("/orderItems", orderItems)
-  .route("/comments", comments);
+  .route("/comments", comments)
+  .route("/productRating", productRating);
 
 export const GET = handle(app);
 export const POST = handle(app);
