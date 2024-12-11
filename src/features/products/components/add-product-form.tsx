@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -60,7 +59,8 @@ export function getColorNameByHex(hex: string): string | undefined {
 
 const COLOR_OPTIONS = Object.keys(ColorEnum) as (keyof typeof ColorEnum)[];
 
-const SIZE_OPTIONS = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+export const SIZE_OPTIONS = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"] as const;
+type SizeType = (typeof SIZE_OPTIONS)[number];
 
 type ColorType =
   | "Red"
@@ -91,7 +91,7 @@ const AddProductForm = () => {
     useCreateProduct();
 
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+  const [selectedSizes, setSelectedSizes] = useState<SizeType[]>([]);
 
   const { close } = useAddProductDialog();
 
@@ -114,7 +114,13 @@ const AddProductForm = () => {
 
   const handleSubmit = (values: InsertProductType) => {
     createProduct(
-      { json: values },
+      {
+        json: {
+          ...values,
+          colors: selectedColors,
+          sizes: selectedSizes,
+        },
+      },
       {
         onError: () => {
           form.reset();
@@ -132,13 +138,13 @@ const AddProductForm = () => {
   };
 
   // Helper function to toggle size selection
-  const toggleSize = (size: string) => {
+  const toggleSize = (size: SizeType) => {
     setSelectedSizes((prev) =>
       prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size],
     );
   };
 
-  // TODO: Make the add product form scrollable
+  // TODO: Make the form scrollable
 
   return (
     <Form {...form}>
@@ -206,38 +212,32 @@ const AddProductForm = () => {
         />
         <FormItem>
           <FormLabel>Colors</FormLabel>
-          {/* TODO: Make this scrollable */}
-          <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
-            <div className="mb-2 flex flex-wrap gap-2 p-2">
-              {COLOR_OPTIONS.map((color) => (
-                <Button
-                  key={color}
-                  type="button"
-                  variant={
-                    selectedColors.includes(color) ? "default" : "outline"
-                  }
-                  size="sm"
-                  onClick={() => toggleColor(color)}
-                  disabled={form.formState.isSubmitting || isCreatingProduct}
-                  className="dark:text-white"
-                  style={{
-                    backgroundColor: selectedColors.includes(color)
-                      ? ColorEnum[color]
-                      : "transparent",
-                    color: selectedColors.includes(color)
-                      ? color === "White"
-                        ? "black"
-                        : "white"
-                      : "black",
-                  }}
-                >
-                  {color}
-                </Button>
-              ))}
-            </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
-
+          {/* TODO: Make this wrap */}
+          <div className="mb-2 flex max-w-80 flex-wrap gap-2 border p-2">
+            {COLOR_OPTIONS.map((color) => (
+              <Button
+                key={color}
+                type="button"
+                variant={selectedColors.includes(color) ? "default" : "outline"}
+                size="sm"
+                onClick={() => toggleColor(color)}
+                disabled={form.formState.isSubmitting || isCreatingProduct}
+                className="dark:text-white"
+                style={{
+                  backgroundColor: selectedColors.includes(color)
+                    ? ColorEnum[color]
+                    : "transparent",
+                  color: selectedColors.includes(color)
+                    ? color === "White"
+                      ? "black"
+                      : "white"
+                    : "black",
+                }}
+              >
+                {color}
+              </Button>
+            ))}
+          </div>
           {selectedColors.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-x-2">
               {selectedColors.map((color) => (
