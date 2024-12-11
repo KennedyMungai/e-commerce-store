@@ -26,6 +26,14 @@ export const ShippingMethods = pgEnum("shipping_method", [
 
 export const SizeEnum = z.enum(["XS", "S", "M", "L", "XL", "XXL", "XXXL"]);
 
+export const OrderStatus = pgEnum("order_status", [
+  "pending",
+  "processing",
+  "shipped",
+  "delivered",
+  "cancelled",
+]);
+
 export const users = pgTable(
   "user",
   {
@@ -230,6 +238,7 @@ export const Order = pgTable("orders", {
   user_id: text("user_id").references(() => users.id, { onDelete: "cascade" }),
   location: geometry("location", { type: "point", mode: "xy", srid: 4326 }),
   shippingMethod: ShippingMethods("shipping_method").notNull(),
+  orderStatus: OrderStatus("order_status").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
 });
