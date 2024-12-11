@@ -412,6 +412,7 @@ export const SelectSupplierSchema = createSelectSchema(Supplier);
 
 export type SelectSupplierType = z.infer<typeof SelectSupplierSchema>;
 
+// TODO: Add a wishlist item table
 export const WishList = pgTable(
   "wishlists",
   {
