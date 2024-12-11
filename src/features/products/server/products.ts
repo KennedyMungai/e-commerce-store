@@ -45,6 +45,24 @@ export const products = new Hono()
       return c.json({ data });
     },
   )
+  .get(
+    "/:supplierId",
+    verifyAuth(),
+    zValidator("param", z.object({ supplierId: z.string() })),
+    async (c) => {
+      const auth = c.get("authUser");
+      const { supplierId } = c.req.valid("param");
+
+      if (auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
+
+      const data = await db
+        .select()
+        .from(Product)
+        .where(eq(Product.supplier_id, supplierId));
+
+      return c.json({ data });
+    },
+  )
   .post(
     "/",
     verifyAuth(),
