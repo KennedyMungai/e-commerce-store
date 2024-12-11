@@ -319,6 +319,7 @@ export const CommentRelations = relations(Comment, ({ one }) => ({
 
 export const InsertCommentSchema = createInsertSchema(Comment).omit({
   id: true,
+  user_id: true,
   createdAt: true,
   updatedAt: true,
 });
