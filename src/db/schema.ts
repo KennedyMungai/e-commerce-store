@@ -361,7 +361,7 @@ export const ProductRatingRelations = relations(ProductRating, ({ one }) => ({
 
 export const InsertProductRatingSchema = createInsertSchema(ProductRating).omit(
   {
-    id: true,
+    user_id: true,
   },
 );
 
