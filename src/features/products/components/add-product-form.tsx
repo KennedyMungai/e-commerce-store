@@ -20,12 +20,14 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { InsertProductSchema, InsertProductType } from "@/db/schema";
+import { useCreateProduct } from "@/features/products/api/use-create-product";
 import { useFetchSuppliers } from "@/features/suppliers/api/use-fetch-suppliers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { XIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAddProductDialog } from "../hooks/use-add-product-dialog";
 
 export enum ColorEnum {
   Red = "#FF0000",
@@ -85,9 +87,13 @@ const AddProductForm = () => {
   const pathname = usePathname();
 
   const { data: suppliersData } = useFetchSuppliers();
+  const { mutate: createProduct, isPending: isCreatingProduct } =
+    useCreateProduct();
 
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+
+  const { close } = useAddProductDialog();
 
   const category_id = pathname.split("/")[4];
 
@@ -107,7 +113,16 @@ const AddProductForm = () => {
   });
 
   const handleSubmit = (values: InsertProductType) => {
-    console.log(values);
+    createProduct(
+      { json: values },
+      {
+        onError: () => {
+          form.reset();
+
+          close();
+        },
+      },
+    );
   };
 
   const toggleColor = (color: keyof typeof ColorEnum) => {
@@ -138,7 +153,11 @@ const AddProductForm = () => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Product Name" />
+                <Input
+                  {...field}
+                  placeholder="Product Name"
+                  disabled={isCreatingProduct || form.formState.isSubmitting}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -151,7 +170,11 @@ const AddProductForm = () => {
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Product Price" />
+                <Input
+                  {...field}
+                  placeholder="Product Price"
+                  disabled={form.formState.isSubmitting || isCreatingProduct}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -169,6 +192,7 @@ const AddProductForm = () => {
                   placeholder="Product Quantity"
                   type="number"
                   min={0}
+                  disabled={form.formState.isSubmitting || isCreatingProduct}
                   onChange={(e) => {
                     const value =
                       e.target.value === "" ? 0 : parseInt(e.target.value);
@@ -194,6 +218,7 @@ const AddProductForm = () => {
                   }
                   size="sm"
                   onClick={() => toggleColor(color)}
+                  disabled={form.formState.isSubmitting || isCreatingProduct}
                   className="dark:text-white"
                   style={{
                     backgroundColor: selectedColors.includes(color)
@@ -247,6 +272,7 @@ const AddProductForm = () => {
                 type="button"
                 variant={selectedSizes.includes(size) ? "default" : "outline"}
                 size="sm"
+                disabled={form.formState.isSubmitting || isCreatingProduct}
                 onClick={() => toggleSize(size)}
               >
                 {size}
@@ -284,6 +310,7 @@ const AddProductForm = () => {
                   rows={4}
                   {...field}
                   placeholder="Product Description"
+                  disabled={form.formState.isSubmitting || isCreatingProduct}
                 />
               </FormControl>
               <FormMessage />
@@ -305,7 +332,13 @@ const AddProductForm = () => {
                 <SelectContent>
                   {/* TODO: Implement the loading and error states */}
                   {suppliersData?.data.map((supplier) => (
-                    <SelectItem value={supplier.id} key={supplier.id}>
+                    <SelectItem
+                      value={supplier.id}
+                      key={supplier.id}
+                      disabled={
+                        form.formState.isSubmitting || isCreatingProduct
+                      }
+                    >
                       {supplier.name}
                     </SelectItem>
                   ))}
@@ -315,7 +348,11 @@ const AddProductForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={form.formState.isSubmitting || isCreatingProduct}
+        >
           Add a new product
         </Button>
       </form>
