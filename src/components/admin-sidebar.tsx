@@ -6,6 +6,7 @@ import { BoxIcon, MapIcon, TruckIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useMedia } from "react-use";
 
 const links = [
   {
@@ -28,8 +29,11 @@ const links = [
 const AdminSidebar = () => {
   const pathname = usePathname();
 
+  // TODO: Make updates to the responsiveness of the buttons
+  const isWide = useMedia("(min-width: 768px)");
+
   return (
-    <aside className="flex w-32 flex-col items-center justify-between border-r p-4">
+    <aside className="flex w-20 flex-col items-center justify-between border-r p-4 md:w-32">
       <Link href="/dashboard">
         <div className="flex flex-col items-center gap-2 text-neutral-600">
           <Image src="/logo.svg" width={40} height={40} alt="Logo" />
@@ -39,6 +43,7 @@ const AdminSidebar = () => {
         {links.map((link) => (
           <Button
             key={link.href}
+            size={isWide ? "default" : "icon"}
             className="flex w-full items-center justify-center"
             asChild
             variant={pathname === link.href ? "default" : "outline"}
