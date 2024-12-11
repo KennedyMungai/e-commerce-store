@@ -25,9 +25,11 @@ const SupplierInfo = ({ supplierId }: Props) => {
     isError: isSupplierProductsError,
   } = useFetchSupplierProducts(supplierId);
 
+  // TODO: Update the loading markup
   if (isSupplierDataPending || isSupplierProductsPending)
     return <div>Loading...</div>;
 
+  // TODO: Update the error markup
   if (isSupplierDataError || isSupplierProductsError) return <div>Error</div>;
 
   const suppliers = supplierProducts.data.map((supplier) => ({
