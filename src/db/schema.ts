@@ -330,14 +330,23 @@ export const SelectCommentSchema = createSelectSchema(Comment);
 
 export type SelectCommentType = z.infer<typeof SelectCommentSchema>;
 
-export const ProductRating = pgTable("product_ratings", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  user_id: text("user_id").references(() => users.id, { onDelete: "cascade" }),
-  product_id: uuid("product_id").references(() => Product.id, {
-    onDelete: "cascade",
+export const ProductRating = pgTable(
+  "product_ratings",
+  {
+    user_id: text("user_id").references(() => users.id, {
+      onDelete: "cascade",
+    }),
+    product_id: uuid("product_id").references(() => Product.id, {
+      onDelete: "cascade",
+    }),
+    rating: integer("rating").default(0).notNull(),
+  },
+  (table) => ({
+    pk: primaryKey({
+      columns: [table.user_id, table.product_id],
+    }),
   }),
-  rating: integer("rating").default(0).notNull(),
-});
+);
 
 export const ProductRatingRelations = relations(ProductRating, ({ one }) => ({
   product: one(Product, {
