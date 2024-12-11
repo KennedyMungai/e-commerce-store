@@ -257,6 +257,9 @@ export const OrderItem = pgTable(
     order_id: uuid("order_id").references(() => Order.id, {
       onDelete: "cascade",
     }),
+    user_id: text("user_id").references(() => users.id, {
+      onDelete: "cascade",
+    }),
     quantity: integer("quantity").default(1).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
@@ -274,6 +277,10 @@ export const OrderItemRelations = relations(OrderItem, ({ one }) => ({
   order: one(Order, {
     fields: [OrderItem.order_id],
     references: [Order.id],
+  }),
+  user: one(users, {
+    fields: [OrderItem.user_id],
+    references: [users.id],
   }),
 }));
 
