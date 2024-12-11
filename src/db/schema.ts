@@ -237,6 +237,7 @@ export const OrderRelations = relations(Order, ({ one, many }) => ({
 
 export const InsertOrderSchema = createInsertSchema(Order).omit({
   id: true,
+  user_id: true,
   createdAt: true,
   updatedAt: true,
 });
