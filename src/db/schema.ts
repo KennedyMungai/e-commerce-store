@@ -190,7 +190,14 @@ export const InsertProductSchema = createInsertSchema(Product)
 
 export type InsertProductType = z.infer<typeof InsertProductSchema>;
 
-export const SelectProductSchema = createSelectSchema(Product);
+export const SelectProductSchema = createSelectSchema(Product).extend({
+  colors: z
+    .union([z.string(), z.array(z.string())])
+    .transform((value) => (Array.isArray(value) ? value : [value])),
+  sizes: z
+    .union([SizeEnum, z.array(SizeEnum)])
+    .transform((value) => (Array.isArray(value) ? value : [value])),
+});
 
 export type SelectProductType = z.infer<typeof SelectProductSchema>;
 
