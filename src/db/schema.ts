@@ -423,7 +423,14 @@ export const WishList = pgTable("wishlists", {
 });
 
 export const WishListRelations = relations(WishList, ({ one }) => ({
-  user: one(users),
+  user: one(users, {
+    fields: [WishList.user_id],
+    references: [users.id],
+  }),
+  product: one(Product, {
+    fields: [WishList.product_id],
+    references: [Product.id],
+  }),
 }));
 
 export const InsertWishListSchema = createInsertSchema(WishList).omit({
