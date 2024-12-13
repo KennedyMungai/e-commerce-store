@@ -412,35 +412,18 @@ export const SelectSupplierSchema = createSelectSchema(Supplier);
 
 export type SelectSupplierType = z.infer<typeof SelectSupplierSchema>;
 
-// TODO: Add a wishlist item table
-export const WishList = pgTable(
-  "wishlists",
-  {
-    user_id: text("user_id").references(() => users.id, {
-      onDelete: "cascade",
-    }),
-    product_id: uuid("product_id").references(() => Product.id, {
-      onDelete: "cascade",
-    }),
-    created_at: timestamp("created_at").defaultNow().notNull(),
-    updated_at: timestamp("updated_at").$onUpdate(() => new Date()),
-  },
-  (table) => ({
-    pk: primaryKey({
-      columns: [table.user_id, table.product_id],
-    }),
+export const WishList = pgTable("wishlists", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  user_id: text("user_id").references(() => users.id, { onDelete: "cascade" }),
+  product_id: uuid("product_id").references(() => Product.id, {
+    onDelete: "cascade",
   }),
-);
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").$onUpdate(() => new Date()),
+});
 
 export const WishListRelations = relations(WishList, ({ one }) => ({
-  product: one(Product, {
-    fields: [WishList.product_id],
-    references: [Product.id],
-  }),
-  user: one(users, {
-    fields: [WishList.user_id],
-    references: [users.id],
-  }),
+  user: one(users),
 }));
 
 export const InsertWishListSchema = createInsertSchema(WishList).omit({
