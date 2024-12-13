@@ -32,7 +32,7 @@ const SupplierInfo = ({ supplierId }: Props) => {
   // TODO: Update the error markup
   if (isSupplierDataError || isSupplierProductsError) return <div>Error</div>;
 
-  const suppliers = supplierProducts.data.map((supplier) => ({
+  const supplierProductsUpdated = supplierProducts.data.map((supplier) => ({
     ...supplier,
     createdAt: new Date(supplier.createdAt),
     updatedAt: supplier.updatedAt ? new Date(supplier.updatedAt) : null,
@@ -46,7 +46,7 @@ const SupplierInfo = ({ supplierId }: Props) => {
         <div className="flex gap-4">
           <Button variant={"outline"} size="icon" asChild>
             {/* TODO: Look into the types for the supplier data */}
-            <Link href={`tel:${supplierData.data.phone}`}>
+            <Link href={`tel:${supplierData.data.phoneNumber}`}>
               <PhoneIcon className="size-5" />
             </Link>
           </Button>
@@ -58,7 +58,7 @@ const SupplierInfo = ({ supplierId }: Props) => {
           </Button>
         </div>
       </div>
-      <DataTable columns={ProductsColumns} data={suppliers} />
+      <DataTable columns={ProductsColumns} data={supplierProductsUpdated} />
     </div>
   );
 };
