@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { useAddCategoryDialog } from "@/features/categories/hooks/use-add-category-dialog";
 import { useAddProductDialog } from "@/features/products/hooks/use-add-product-dialog";
 import { useAddSupplierDialog } from "@/features/suppliers/hooks/use-add-supplier-dialog";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, ShoppingCartIcon } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -49,6 +50,13 @@ const AdminTopbar = () => {
           </Button>
         )}
         <ModeToggle />
+        {pathname === "/dashboard" && (
+          <Button variant={"outline"} size="icon" asChild>
+            <Link href="/">
+              <ShoppingCartIcon className="size-5" />
+            </Link>
+          </Button>
+        )}
       </div>
     </div>
   );
