@@ -150,7 +150,7 @@ const AddProductForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="h-full space-y-4 overflow-y-auto"
+        className="h-full w-full space-y-4 overflow-y-auto"
       >
         <FormField
           control={form.control}
