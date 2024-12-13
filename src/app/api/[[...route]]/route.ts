@@ -6,6 +6,7 @@ import { orders } from "@/features/orders/server/orders";
 import { productRating } from "@/features/productRating/server/product-rating";
 import { products } from "@/features/products/server/products";
 import { suppliers } from "@/features/suppliers/server/suppliers";
+import { wishlists } from "@/features/wishlists/server/wishlist";
 import { AuthConfig } from "@auth/core";
 import { initAuthConfig } from "@hono/auth-js";
 import { Hono } from "hono";
@@ -31,7 +32,8 @@ const app = new Hono()
   .route("/orders", orders)
   .route("/orderItems", orderItems)
   .route("/comments", comments)
-  .route("/productRating", productRating);
+  .route("/productRating", productRating)
+  .route("/wishlists", wishlists);
 
 export const GET = handle(app);
 export const POST = handle(app);
