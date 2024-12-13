@@ -2,9 +2,9 @@
 
 import { DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
-import { ProductsColumns } from "@/features/products/components/products-columns";
 import { useFetchSupplier } from "@/features/suppliers/api/use-fetch-supplier";
 import { useFetchSupplierProducts } from "@/features/suppliers/api/use-fetch-supplier-products";
+import { SupplierProductColumns } from "@/features/suppliers/components/supplier-products";
 import { MailIcon, PhoneIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -58,7 +58,11 @@ const SupplierInfo = ({ supplierId }: Props) => {
           </Button>
         </div>
       </div>
-      <DataTable columns={ProductsColumns} data={supplierProductsUpdated} />
+      <DataTable
+        // FIXME: Look into the issue
+        columns={SupplierProductColumns}
+        data={supplierProductsUpdated}
+      />
     </div>
   );
 };
