@@ -434,6 +434,7 @@ export const WishListRelations = relations(WishList, ({ one }) => ({
 }));
 
 export const InsertWishListSchema = createInsertSchema(WishList).omit({
+  id: true,
   created_at: true,
   updated_at: true,
 });
