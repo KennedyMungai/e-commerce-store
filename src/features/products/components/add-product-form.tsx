@@ -317,7 +317,15 @@ const AddProductForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Supplier</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={
+                  suppliersData?.data.length === 0 ||
+                  form.formState.isSubmitting ||
+                  isCreatingProduct
+                }
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select the product supplier" />
@@ -344,7 +352,7 @@ const AddProductForm = () => {
         />
         <Button
           type="submit"
-          className="w-full"
+          className="mt-4 w-full"
           disabled={form.formState.isSubmitting || isCreatingProduct}
         >
           Add a new product
