@@ -12,11 +12,11 @@ const AddProductDialog = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent>
+      <DialogContent className="h-full overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add a new product</DialogTitle>
         </DialogHeader>
-        <div className="max-h-[20rem] space-y-4 overflow-y-auto">
+        <div className="p-2">
           <AddProductForm />
         </div>
       </DialogContent>

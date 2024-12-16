@@ -144,14 +144,9 @@ const AddProductForm = () => {
     );
   };
 
-  // TODO: Make the form scrollable
-
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleSubmit)}
-        className="h-full w-full space-y-4 overflow-y-auto"
-      >
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
         <FormField
           control={form.control}
           name="name"
@@ -212,7 +207,6 @@ const AddProductForm = () => {
         />
         <FormItem>
           <FormLabel>Colors</FormLabel>
-          {/* TODO: Make this wrap */}
           <div className="mb-2 flex max-w-80 flex-wrap gap-2 border p-2">
             {COLOR_OPTIONS.map((color) => (
               <Button
