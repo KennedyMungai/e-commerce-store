@@ -240,7 +240,7 @@ export const Order = pgTable("orders", {
   shippingMethod: ShippingMethods("shipping_method")
     .default("standard")
     .notNull(),
-  orderStatus: OrderStatus("order_status").notNull(),
+  orderStatus: OrderStatus("order_status").default("processing").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
 });
@@ -253,12 +253,19 @@ export const OrderRelations = relations(Order, ({ one, many }) => ({
   orderItems: many(OrderItem),
 }));
 
-export const InsertOrderSchema = createInsertSchema(Order).omit({
-  id: true,
-  user_id: true,
-  createdAt: true,
-  updatedAt: true,
-});
+export const InsertOrderSchema = createInsertSchema(Order)
+  .omit({
+    id: true,
+    user_id: true,
+    createdAt: true,
+    updatedAt: true,
+  })
+  .extend({
+    location: z.object({
+      x: z.number(),
+      y: z.number(),
+    }),
+  });
 
 export type InsertOrderType = z.infer<typeof InsertOrderSchema>;
 
