@@ -53,15 +53,18 @@ export const orders = new Hono()
   )
   .post("/", verifyAuth(), zValidator("json", InsertOrderSchema), async (c) => {
     const auth = c.get("authUser");
-    const { shippingMethod, location } = c.req.valid("json");
+    const { shippingMethod, location, orderStatus } = c.req.valid("json");
 
     if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
 
-    // TODO: Check the types
     const [data] = await db
       .insert(Order)
-      // TODO: Check the types and make updates
-      .values({ user_id: auth.token.id as string, shippingMethod, location })
+      .values({
+        user_id: auth.token.id as string,
+        shippingMethod,
+        location,
+        orderStatus,
+      })
       .returning();
 
     if (!data) return c.json({ error: "Failed to create order" }, 400);
@@ -80,7 +83,6 @@ export const orders = new Hono()
 
       if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
 
-      // TODO: Check the types
       const [data] = await db
         .update(Order)
         .set({ shippingMethod, location })
