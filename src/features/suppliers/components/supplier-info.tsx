@@ -41,17 +41,14 @@ const SupplierInfo = ({ supplierId }: Props) => {
   return (
     <div className="flex size-full flex-col">
       <div className="flex justify-between gap-4">
-        {/* TODO: Look into the types for the supplier data */}
         <h1 className="text-3xl font-semibold">{supplierData.data.name}</h1>
         <div className="flex gap-4">
           <Button variant={"outline"} size="icon" asChild>
-            {/* TODO: Look into the types for the supplier data */}
             <Link href={`tel:${supplierData.data.phoneNumber}`}>
               <PhoneIcon className="size-5" />
             </Link>
           </Button>
           <Button variant={"outline"} size="icon" asChild>
-            {/* TODO: Look into the types for the supplier data */}
             <Link href={`mailto:${supplierData.data.email}`}>
               <MailIcon className="size-5" />
             </Link>
