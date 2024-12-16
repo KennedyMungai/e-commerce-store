@@ -261,10 +261,12 @@ export const InsertOrderSchema = createInsertSchema(Order)
     updatedAt: true,
   })
   .extend({
-    location: z.object({
-      x: z.number(),
-      y: z.number(),
-    }),
+    location: z
+      .object({
+        x: z.number(),
+        y: z.number(),
+      })
+      .optional(),
   });
 
 export type InsertOrderType = z.infer<typeof InsertOrderSchema>;
