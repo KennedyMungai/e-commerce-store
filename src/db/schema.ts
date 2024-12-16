@@ -237,7 +237,9 @@ export const Order = pgTable("orders", {
   id: uuid("id").defaultRandom().primaryKey(),
   user_id: text("user_id").references(() => users.id, { onDelete: "cascade" }),
   location: geometry("location", { type: "point", mode: "xy", srid: 4326 }),
-  shippingMethod: ShippingMethods("shipping_method").notNull(),
+  shippingMethod: ShippingMethods("shipping_method")
+    .default("standard")
+    .notNull(),
   orderStatus: OrderStatus("order_status").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
