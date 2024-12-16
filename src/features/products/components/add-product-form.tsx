@@ -113,13 +113,16 @@ const AddProductForm = () => {
   });
 
   const handleSubmit = (values: InsertProductType) => {
+    const processedValues = {
+      ...values,
+      price: values.price,
+      colors: selectedColors,
+      sizes: selectedSizes,
+    };
+
     createProduct(
       {
-        json: {
-          ...values,
-          colors: selectedColors,
-          sizes: selectedSizes,
-        },
+        json: processedValues,
       },
       {
         onError: () => {
