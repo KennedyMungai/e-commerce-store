@@ -194,6 +194,7 @@ export const InsertProductSchema = createInsertSchema(Product)
     sizes: z
       .union([SizeEnum, z.array(SizeEnum)])
       .transform((value) => (Array.isArray(value) ? value : [value])),
+    price: z.coerce.number(),
   });
 
 export type InsertProductType = z.infer<typeof InsertProductSchema>;

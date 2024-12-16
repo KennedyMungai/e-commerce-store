@@ -101,7 +101,7 @@ const AddProductForm = () => {
     resolver: zodResolver(InsertProductSchema),
     defaultValues: {
       name: "",
-      price: "",
+      price: 0,
       quantity: 0,
       description: "",
       image_url: "",
