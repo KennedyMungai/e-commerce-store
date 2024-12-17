@@ -21,7 +21,7 @@ const CategoryDetails = ({ id }: Props) => {
       <h3 className="text-2xl font-semibold capitalize text-neutral-700">
         {data?.data.name}
       </h3>
-      <ProductsTable />
+      <ProductsTable id={id} />
     </div>
   );
 };
