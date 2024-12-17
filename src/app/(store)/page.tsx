@@ -1,5 +1,5 @@
 const HomePage = () => {
-  return <main></main>;
+  return <main className="container mx-auto"></main>;
 };
 
 export default HomePage;
