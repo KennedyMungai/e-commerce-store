@@ -150,7 +150,7 @@ export const Product = pgTable("products", {
   colors: text("colors")
     .array()
     .default(sql`ARRAY[]::text[]`),
-  sizes: text("colors")
+  sizes: text("sizes")
     .array()
     .default(sql`ARRAY[]::text[]`),
   supplier_id: uuid("supplier_id")
