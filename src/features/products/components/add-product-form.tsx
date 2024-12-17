@@ -62,26 +62,7 @@ const COLOR_OPTIONS = Object.keys(ColorEnum) as (keyof typeof ColorEnum)[];
 export const SIZE_OPTIONS = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"] as const;
 type SizeType = (typeof SIZE_OPTIONS)[number];
 
-type ColorType =
-  | "Red"
-  | "Blue"
-  | "Green"
-  | "Yellow"
-  | "Black"
-  | "White"
-  | "Gray"
-  | "Pink"
-  | "Purple"
-  | "Orange"
-  | "Brown"
-  | "Navy"
-  | "Teal"
-  | "Maroon"
-  | "Olive"
-  | "Aqua"
-  | "Silver"
-  | "Lavender"
-  | "Turquoise";
+type ColorType = keyof typeof ColorEnum;
 
 const AddProductForm = () => {
   const pathname = usePathname();
