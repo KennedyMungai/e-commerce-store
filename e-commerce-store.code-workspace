@@ -16,7 +16,8 @@
 			"superadmin",
 			"Topbar",
 			"turbopack",
-			"Uploadthing"
+			"Uploadthing",
+			"utfs"
 		]
 	}
 }
