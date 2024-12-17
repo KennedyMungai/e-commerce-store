@@ -25,7 +25,7 @@ const StoreNavbar = () => {
         </Link>
         <div className="hidden flex-1 px-8 md:flex">
           <Input
-            className="w-full bg-slate-100 text-center"
+            className="w-full bg-slate-50 text-center"
             placeholder="Search products"
           />
         </div>
