@@ -14,6 +14,7 @@ import {
   PencilIcon,
   TrashIcon,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export const ProductsColumns: ColumnDef<{
@@ -90,11 +91,20 @@ export const ProductsColumns: ColumnDef<{
     accessorKey: "image_url",
     header: "Image",
     cell: ({ row }) => {
-      const { id, image_url } = row.original;
+      const { id, image_url, name } = row.original;
 
       return (
         <div>
-          <UploadImage id={id} image_url={image_url} />
+          {image_url ? (
+            <Image
+              src={image_url}
+              width={40}
+              height={40}
+              alt={`${name} image`}
+            />
+          ) : (
+            <UploadImage id={id} imageUrl={image_url} />
+          )}
         </div>
       );
     },
