@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { InferResponseType } from "hono";
 
 type ResponseType = InferResponseType<
-  (typeof client.api.products)[":supplierId"]["$get"],
+  (typeof client.api.products.supplier)[":supplierId"]["$get"],
   200
 >;
 
@@ -11,7 +11,9 @@ export const useFetchSupplierProducts = (supplierId: string) =>
   useQuery<ResponseType, Error>({
     queryKey: ["supplier-products", { supplierId }],
     queryFn: async () => {
-      const response = await client.api.products[":supplierId"]["$get"]({
+      const response = await client.api.products.supplier[":supplierId"][
+        "$get"
+      ]({
         param: {
           supplierId,
         },
