@@ -20,13 +20,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { InsertProductSchema, InsertProductType } from "@/db/schema";
 import { useCreateProduct } from "@/features/products/api/use-create-product";
+import { useAddProductDialog } from "@/features/products/hooks/use-add-product-dialog";
 import { useFetchSuppliers } from "@/features/suppliers/api/use-fetch-suppliers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { XIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAddProductDialog } from "../hooks/use-add-product-dialog";
 
 export enum ColorEnum {
   Red = "#FF0000",
@@ -71,7 +71,7 @@ const AddProductForm = () => {
   const { mutate: createProduct, isPending: isCreatingProduct } =
     useCreateProduct();
 
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedColors, setSelectedColors] = useState<ColorType[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<SizeType[]>([]);
 
   const { close } = useAddProductDialog();
