@@ -1,10 +1,10 @@
-import { Button, buttonVariants } from "@/components/ui/button";
-import { UploadIcon } from "lucide-react";
-import { useUploadThing } from "@/utils/uploadthing";
-import { ChangeEvent } from "react";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useEditProduct } from "../api/use-edit-product";
+import { useUploadThing } from "@/utils/uploadthing";
+import { UploadIcon } from "lucide-react";
+import { ChangeEvent } from "react";
 import { toast } from "sonner";
+import { useEditProduct } from "../api/use-edit-product";
 
 type Input = Parameters<typeof useUploadThing>;
 
@@ -24,6 +24,7 @@ const useUploadThingInputProps = (...args: Input) => {
   return {
     inputProps: {
       onChange,
+      //   @ts-expect-error PermittedFileInfo is not defined but this still works
       multiple: ($ut.permittedFileInfo?.config.image?.maxFileCount ?? 1) > 1,
       accept: "image/*",
     },
