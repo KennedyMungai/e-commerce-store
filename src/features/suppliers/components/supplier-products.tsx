@@ -1,4 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { ImageOffIcon } from "lucide-react";
+import Image from "next/image";
 
 export const SupplierProductColumns: ColumnDef<{
   createdAt: Date;
@@ -25,6 +27,19 @@ export const SupplierProductColumns: ColumnDef<{
   {
     accessorKey: "image_url",
     header: "Product Image",
+    cell: ({ row }) => {
+      const { image_url } = row.original;
+
+      return (
+        <div>
+          {image_url ? (
+            <Image src={image_url} width={40} height={40} alt="product image" />
+          ) : (
+            <ImageOffIcon className="size-5" />
+          )}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "createdAt",
