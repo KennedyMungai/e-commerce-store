@@ -3,7 +3,7 @@ import { UploadIcon } from "lucide-react";
 
 type Props = {
   id: string;
-  imageUrl?: string;
+  imageUrl: string | null;
 };
 
 const UploadImage = ({ id, imageUrl }: Props) => {
