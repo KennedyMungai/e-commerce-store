@@ -3,10 +3,9 @@ import { UploadIcon } from "lucide-react";
 
 type Props = {
   id: string;
-  imageUrl: string | null;
 };
 
-const UploadImageButton = ({ id, imageUrl }: Props) => {
+const UploadImageButton = ({ id }: Props) => {
   return (
     <Button size="icon" variant="outline">
       <UploadIcon />

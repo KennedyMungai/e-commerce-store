@@ -103,7 +103,7 @@ export const ProductsColumns: ColumnDef<{
               alt={`${name} image`}
             />
           ) : (
-            <UploadImageButton id={id} imageUrl={image_url} />
+            <UploadImageButton id={id} />
           )}
         </div>
       );
