@@ -107,7 +107,20 @@ export const products = new Hono()
     "/:id",
     verifyAuth(),
     zValidator("param", z.object({ id: z.string() })),
-    zValidator("json", InsertProductSchema),
+    zValidator(
+      "json",
+      z.object({
+        category_id: z.string().optional(),
+        colors: z.array(z.string()).optional(),
+        description: z.string().optional(),
+        price: z.number().optional(),
+        sizes: z.array(z.string()).optional(),
+        supplier_id: z.string().optional(),
+        image_url: z.string().optional(),
+        name: z.string().optional(),
+        quantity: z.number().optional(),
+      }),
+    ),
     async (c) => {
       const auth = c.get("authUser");
       const { id } = c.req.valid("param");
@@ -131,7 +144,7 @@ export const products = new Hono()
           category_id,
           colors,
           description,
-          price: price.toString(),
+          price: price ? price.toString() : undefined,
           sizes,
           supplier_id,
           image_url,
