@@ -30,10 +30,8 @@ const AdminTopbar = () => {
         {pathname === "/dashboard/categories" && "Categories"}
         {pathname === "/dashboard/suppliers" && "Suppliers"}
         {pathname === "/dashboard/orders" && "Orders"}
-        {/* TODO: Fix the categories error */}
-        {pathname.startsWith("/dashboard/categories/category") &&
-          pathname.split("/").length === 4 &&
-          pathname.split("/").length < 5 &&
+        {pathname.split("/").length === 5 &&
+          pathname.split("/")[3] === "category" &&
           "Category"}
         {pathname.startsWith("/dashboard/suppliers/supplier") && "Supplier"}
         {pathname.startsWith("/dashboard/categories/category") &&
