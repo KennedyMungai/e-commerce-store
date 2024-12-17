@@ -39,11 +39,7 @@ const ProductDetails = ({ productId }: Props) => {
         </div>
         <div className="basis-1/2">
           <h3>{productData.data.name}</h3>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
-            magnam voluptatem soluta numquam odit cumque asperiores. Aut
-            asperiores quo at.
-          </p>
+          <p></p>
         </div>
       </div>
     </div>
