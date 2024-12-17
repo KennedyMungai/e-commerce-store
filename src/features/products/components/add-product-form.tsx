@@ -115,7 +115,6 @@ const AddProductForm = () => {
   const handleSubmit = (values: InsertProductType) => {
     const processedValues = {
       ...values,
-      price: values.price,
       colors: selectedColors,
       sizes: selectedSizes,
     };
