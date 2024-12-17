@@ -20,7 +20,7 @@ const SupplierInfo = ({ supplierId }: Props) => {
   } = useFetchSupplier(supplierId);
 
   const {
-    data: supplierProducts,
+    data: supplierProductsData,
     isPending: isSupplierProductsPending,
     isError: isSupplierProductsError,
   } = useFetchSupplierProducts(supplierId);
@@ -32,7 +32,7 @@ const SupplierInfo = ({ supplierId }: Props) => {
   // TODO: Update the error markup
   if (isSupplierDataError || isSupplierProductsError) return <div>Error</div>;
 
-  const supplierProductsUpdated = supplierProducts.data.map((supplier) => ({
+  const supplierProductsUpdated = supplierProductsData.data.map((supplier) => ({
     ...supplier,
     createdAt: new Date(supplier.createdAt),
     updatedAt: supplier.updatedAt ? new Date(supplier.updatedAt) : null,
