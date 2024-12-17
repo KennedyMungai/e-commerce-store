@@ -6,7 +6,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { SelectProductType } from "@/db/schema";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowUpDownIcon,
@@ -16,7 +15,20 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export const ProductsColumns: ColumnDef<SelectProductType>[] = [
+export const ProductsColumns: ColumnDef<{
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  image_url: string | null;
+  colors: string[] | null;
+  sizes: string[] | null;
+  supplier_id: string;
+  createdAt: Date;
+  updatedAt: Date | null;
+  category_id: string;
+  quantity: number;
+}>[] = [
   {
     id: "select",
     header: ({ table }) => (
