@@ -56,7 +56,6 @@ const SupplierInfo = ({ supplierId }: Props) => {
         </div>
       </div>
       <DataTable
-        // FIXME: Look into the issue
         columns={SupplierProductColumns}
         data={supplierProductsUpdated}
       />
