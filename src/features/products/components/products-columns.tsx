@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import UploadImage from "@/features/products/components/upload-image";
+import UploadImageButton from "@/features/products/components/upload-image";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowUpDownIcon,
@@ -103,7 +103,7 @@ export const ProductsColumns: ColumnDef<{
               alt={`${name} image`}
             />
           ) : (
-            <UploadImage id={id} imageUrl={image_url} />
+            <UploadImageButton id={id} imageUrl={image_url} />
           )}
         </div>
       );

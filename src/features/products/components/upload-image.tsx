@@ -6,7 +6,7 @@ type Props = {
   imageUrl: string | null;
 };
 
-const UploadImage = ({ id, imageUrl }: Props) => {
+const UploadImageButton = ({ id, imageUrl }: Props) => {
   return (
     <Button size="icon" variant="outline">
       <UploadIcon />
@@ -14,4 +14,4 @@ const UploadImage = ({ id, imageUrl }: Props) => {
   );
 };
 
-export default UploadImage;
+export default UploadImageButton;
