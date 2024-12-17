@@ -1,8 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { SelectProductType } from "@/db/schema";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDownIcon } from "lucide-react";
+import {
+  ArrowUpDownIcon,
+  MoreVerticalIcon,
+  PencilIcon,
+  TrashIcon,
+} from "lucide-react";
 import Link from "next/link";
 
 export const ProductsColumns: ColumnDef<SelectProductType>[] = [
@@ -78,5 +89,30 @@ export const ProductsColumns: ColumnDef<SelectProductType>[] = [
   {
     id: "actions",
     header: "Actions",
+    cell: ({ row }) => {
+      const { id } = row.original;
+
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant={"ghost"} className="p-0">
+              <MoreVerticalIcon className="size-6" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-fit space-y-2">
+            <DropdownMenuItem className="flex cursor-pointer justify-center p-1">
+              <Button size={"icon"} variant={"outline"}>
+                <PencilIcon className="size-5" />
+              </Button>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex cursor-pointer justify-center p-1">
+              <Button size="icon" variant={"outline"}>
+                <TrashIcon className="size-5" />
+              </Button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
   },
 ];
