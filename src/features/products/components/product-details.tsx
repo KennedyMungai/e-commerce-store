@@ -1,6 +1,7 @@
 "use client";
 
 import { useFetchProduct } from "@/features/products/api/use-fetch-product";
+import { ImageOffIcon } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -22,24 +23,27 @@ const ProductDetails = ({ productId }: Props) => {
 
   //   TODO: Fix the markup
   return (
-    <div className="h-full p-4">
-      <div className="grid grid-cols-2">
-        <div className="col-span-1">
-          {productData?.data.image_url ? (
+    <div className="h-[90vh] p-4">
+      <div className="grid size-full grid-flow-col grid-cols-2">
+        <div className="flex basis-1/2 items-center justify-center">
+          {productData.data.image_url ? (
             <Image
-              src={productData?.data.image_url}
-              width={400}
-              height={400}
-              alt="Product"
+              src={productData.data.image_url}
+              width={200}
+              height={200}
+              alt={productData.data.name}
             />
           ) : (
-            <div className="size-full bg-rose-500"></div>
+            <ImageOffIcon className="size-96" />
           )}
         </div>
-        <div className="-col col-span-1 flex flex-1 items-center justify-center text-center">
-          <h3 className="text-2xl font-semibold capitalize text-neutral-700">
-            {productData.data.name}
-          </h3>
+        <div className="basis-1/2">
+          <h3>{productData.data.name}</h3>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
+            magnam voluptatem soluta numquam odit cumque asperiores. Aut
+            asperiores quo at.
+          </p>
         </div>
       </div>
     </div>
