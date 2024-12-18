@@ -9,7 +9,11 @@ const StoreLayout = ({ children }: Props) => {
   return (
     <div className="h-full">
       <StoreNavbar />
-      {children}
+      <div className="h-[91.5vh] bg-slate-50">
+        <div className="container mx-auto h-full overflow-y-auto bg-white p-2">
+          {children}
+        </div>
+      </div>
     </div>
   );
 };
