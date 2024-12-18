@@ -1,6 +1,7 @@
 "use client";
 
 import { useFetchCategories } from "@/features/categories/api/use-fetch-categories";
+import { useRouter } from "next/navigation";
 
 const CategoriesSidebar = () => {
   const {
@@ -8,6 +9,8 @@ const CategoriesSidebar = () => {
     isPending: isCategoriesDataPending,
     isError: isCategoriesDataError,
   } = useFetchCategories();
+
+  const router = useRouter();
 
   if (isCategoriesDataPending) return <div>Loading...</div>;
 
@@ -26,6 +29,7 @@ const CategoriesSidebar = () => {
           <li
             key={category.id}
             className="cursor-pointer rounded-sm border p-0.5 text-sm font-semibold capitalize text-neutral-600 transition-opacity hover:opacity-80"
+            onClick={() => router.push(`/categories/${category.id}`)}
           >
             {category.name}
           </li>
