@@ -15,8 +15,10 @@ const ProductsTable = ({ id }: Props) => {
     isError: isProductsDataError,
   } = useFetchProducts(id);
 
+  // TODO: Update the loading markup
   if (isProductsDataPending) return <div>Loading...</div>;
 
+  // TODO: Update the error markup
   if (isProductsDataError) return <div>Error</div>;
 
   const products = productsData.data.map((product) => ({

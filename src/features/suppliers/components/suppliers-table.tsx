@@ -11,8 +11,10 @@ const SuppliersTable = () => {
     isError: isSuppliersDataError,
   } = useFetchSuppliers();
 
+  // TODO: Update the loading markup
   if (isSuppliersDataLoading) return <div>Loading...</div>;
 
+  // TODO: Update the error markup
   if (isSuppliersDataError) return <div>Error</div>;
 
   const suppliers = suppliersData.data.map((supplier) => ({

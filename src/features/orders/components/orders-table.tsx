@@ -11,8 +11,10 @@ const OrdersTable = () => {
     isError: isOrdersError,
   } = useFetchOrders();
 
+  // TODO: Update the loading markup
   if (isOrdersPending) return <div>Loading...</div>;
 
+  // TODO: Update the error markup
   if (isOrdersError) return <div>Error</div>;
 
   const orders = ordersData.data.map((order) => ({

@@ -12,8 +12,10 @@ const CategoriesSidebar = () => {
 
   const router = useRouter();
 
+  // TODO: Update the loading markup
   if (isCategoriesDataPending) return <div>Loading...</div>;
 
+  // TODO: Update the error markup
   if (isCategoriesDataError) return <div>Error</div>;
 
   const categories = categoriesData.data.map((category) => ({
