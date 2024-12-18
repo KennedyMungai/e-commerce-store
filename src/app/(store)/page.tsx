@@ -1,4 +1,5 @@
 import CategoriesSidebar from "@/app/(store)/_components/categories-sidebar";
+import HomePageCarousel from "@/app/(store)/_components/homepage-carousel";
 
 const HomePage = () => {
   return (
@@ -7,7 +8,9 @@ const HomePage = () => {
         <div>
           <CategoriesSidebar />
         </div>
-        <div className="flex-1 bg-rose-500">Carousel</div>
+        <div className="flex flex-1 items-center justify-center rounded-sm border p-1">
+          <HomePageCarousel />
+        </div>
         <div className="bg-sky-500">Banner</div>
       </div>
     </main>
