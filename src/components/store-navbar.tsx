@@ -1,16 +1,16 @@
 "use client";
 
 import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import UserButton from "@/features/auth/components/user-button";
-// import { useSession } from "next-auth/react";
+import { HeadsetIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { HeadsetIcon } from "lucide-react";
 
 const StoreNavbar = () => {
-  // const session = useSession();
+  const session = useSession();
 
   return (
     <nav className="h-14 border-b">
@@ -32,15 +32,20 @@ const StoreNavbar = () => {
         <div className="flex items-center gap-2">
           <ModeToggle />
           <UserButton />
-          {/* {session.data &&
+          {session.data &&
             (session.data.user?.role === "admin" ||
-              session.data.user?.role === "superadmin") && ( */}
-          <Button variant={"outline"} size="icon" asChild>
-            <Link href="/dashboard">
-              <HeadsetIcon className="size-5" />
-            </Link>
-          </Button>
-          {/* )} */}
+              session.data.user?.role === "superadmin") && (
+              <Button
+                variant={"outline"}
+                size="icon"
+                title="Go to dashboard"
+                asChild
+              >
+                <Link href="/dashboard">
+                  <HeadsetIcon className="size-5" />
+                </Link>
+              </Button>
+            )}
         </div>
       </div>
     </nav>
