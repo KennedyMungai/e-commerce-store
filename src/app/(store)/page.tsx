@@ -9,9 +9,7 @@ const HomePage = () => {
         <div>
           <CategoriesSidebar />
         </div>
-        <div className="flex flex-1 items-center justify-center rounded-sm border p-1">
-          <HomePageCarousel />
-        </div>
+        <HomePageCarousel />
         <div>
           <BannersSection />
         </div>
