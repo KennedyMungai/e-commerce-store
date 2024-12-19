@@ -14,19 +14,18 @@ import { useRef } from "react";
 const HomePageCarousel = () => {
   const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
-  // TODO: Properly style the carousel
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="relative size-full max-w-xs flex-1 bg-rose-500"
+      className="relative mx-12 size-full flex-1"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent className="size-full">
+      <CarouselContent className="h-full rounded-sm">
         {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="size-full p-1">
-              <Card className="size-full">
+          <CarouselItem key={index} className="size-full">
+            <div className="size-full">
+              <Card className="aspect-[9/8] size-full rounded-sm shadow-none">
                 <CardContent className="flex size-full items-center justify-center p-6">
                   <span className="text-4xl font-semibold">{index + 1}</span>
                 </CardContent>
@@ -35,12 +34,8 @@ const HomePageCarousel = () => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="absolute left-2">
-        <CarouselPrevious />
-      </div>
-      <div className="absolute right-2">
-        <CarouselNext />
-      </div>
+      <CarouselPrevious />
+      <CarouselNext />
     </Carousel>
   );
 };
