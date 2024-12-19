@@ -12,13 +12,13 @@ const ProductCard = ({ product }: Props) => {
   return (
     <Link href="/">
       <Card className="h-96 w-64 rounded-sm bg-white">
-        <CardContent className="px-0 pb-2">
+        <CardContent className="relative px-0 pb-2">
           <Image
             src={product.image_url ?? ""}
             alt={product.name}
             width={300}
             height={300}
-            className="rounded-md object-contain"
+            className="rounded-md object-fill"
           />
           <div>
             <p className="text-center text-lg font-semibold">{product.name}</p>
