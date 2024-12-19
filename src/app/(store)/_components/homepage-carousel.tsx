@@ -25,7 +25,7 @@ const HomePageCarousel = () => {
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="size-full">
             <div className="size-full">
-              <Card className="aspect-[9/8] size-full rounded-sm shadow-none">
+              <Card className="aspect-[9/8] size-full rounded-sm shadow-none dark:bg-slate-800">
                 <CardContent className="flex size-full items-center justify-center p-6">
                   <span className="text-4xl font-semibold">{index + 1}</span>
                 </CardContent>

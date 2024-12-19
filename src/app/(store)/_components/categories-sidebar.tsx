@@ -25,12 +25,12 @@ const CategoriesSidebar = () => {
   }));
 
   return (
-    <div className="flex h-full w-36 flex-col items-center overflow-y-auto rounded-md border p-1">
+    <div className="flex h-full w-36 flex-col items-center overflow-y-auto rounded-md border border-neutral-800 p-1 dark:border-neutral-400">
       <ul>
         {categories.map((category) => (
           <li
             key={category.id}
-            className="cursor-pointer rounded-sm border p-0.5 text-sm font-semibold capitalize text-neutral-600 transition-opacity hover:opacity-80"
+            className="cursor-pointer rounded-sm border border-neutral-800 p-0.5 text-sm font-semibold capitalize text-neutral-600 transition-opacity hover:opacity-80 dark:border-neutral-400 dark:text-neutral-400"
             onClick={() => router.push(`/categories/${category.id}`)}
           >
             {category.name}

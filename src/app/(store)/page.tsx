@@ -17,7 +17,7 @@ const HomePage = () => {
         </div>
       </div>
       <Separator className="relative my-6">
-        <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border bg-white px-4 py-2 text-xs text-muted-foreground">
+        <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border bg-white px-4 py-2 text-xs text-muted-foreground dark:bg-slate-800">
           <span className="animate-pulse">Browse our products</span>
           <ArrowDownIcon className="size-3 animate-bounce" />
         </div>
