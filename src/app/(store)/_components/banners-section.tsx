@@ -8,7 +8,8 @@ const BannersSection = () => {
           src="/e-commerce-banner-1.jpg"
           fill
           alt="Ad banner 1"
-          className="object-cover"
+          title="Ad banner 1"
+          className="rounded-sm object-fill"
         />
       </div>
       <div className="relative row-span-1 rounded-sm border">
@@ -16,7 +17,8 @@ const BannersSection = () => {
           src="/e-commerce-banner-2.jpg"
           fill
           alt="Ad banner 2"
-          className="object-cover"
+          title="Ad banner 2"
+          className="rounded-sm object-fill"
         />
       </div>
     </div>
