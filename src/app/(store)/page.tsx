@@ -1,6 +1,7 @@
 import BannersSection from "@/app/(store)/_components/banners-section";
 import CategoriesSidebar from "@/app/(store)/_components/categories-sidebar";
 import HomePageCarousel from "@/app/(store)/_components/homepage-carousel";
+import { Separator } from "@/components/ui/separator";
 
 const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ const HomePage = () => {
           <BannersSection />
         </div>
       </div>
+      <Separator className="my-6" />
     </main>
   );
 };
