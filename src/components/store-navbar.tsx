@@ -18,7 +18,7 @@ const StoreNavbar = () => {
         <Link href="/">
           <div className="flex items-center gap-2 text-neutral-600">
             <Image src="/logo.svg" width={40} height={40} alt="Logo" />
-            <p className="hidden text-lg font-semibold md:flex">
+            <p className="hidden text-lg font-semibold text-neutral-600 dark:text-neutral-400 md:flex">
               E Commerce Store
             </p>
           </div>
