@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
 
 const BannersSection = () => {
   return (
     <div className="grid h-full w-48 grid-rows-2 gap-4 p-1">
-      <div className="relative row-span-1 rounded-sm border">
+      <div
+        className="relative row-span-1 rounded-sm border"
+        onClick={() => alert("Banner Ad clicked")}
+      >
         <Image
           src="/e-commerce-banner-1.jpg"
           fill
@@ -12,7 +17,10 @@ const BannersSection = () => {
           className="rounded-sm object-fill"
         />
       </div>
-      <div className="relative row-span-1 rounded-sm border">
+      <div
+        className="relative row-span-1 rounded-sm border"
+        onClick={() => alert("Banner Ad clicked")}
+      >
         <Image
           src="/e-commerce-banner-2.jpg"
           fill
