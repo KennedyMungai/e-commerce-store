@@ -124,6 +124,10 @@ export const ProductsColumns: ColumnDef<{
     cell: ({ row }) => {
       const { id } = row.original;
 
+      // TODO: Implemented edit and delete functionality
+
+      console.log(id);
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
