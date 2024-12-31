@@ -1,10 +1,10 @@
 import { buttonVariants } from "@/components/ui/button";
+import { useEditProduct } from "@/features/products/api/use-edit-product";
 import { cn } from "@/lib/utils";
 import { useUploadThing } from "@/utils/uploadthing";
 import { UploadIcon } from "lucide-react";
 import { ChangeEvent } from "react";
 import { toast } from "sonner";
-import { useEditProduct } from "../api/use-edit-product";
 
 type Input = Parameters<typeof useUploadThing>;
 

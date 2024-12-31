@@ -17,12 +17,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { forgotPasswordAction } from "@/features/auth/actions/auth-actions";
 import { ForgotPasswordSchema, ForgotPasswordType } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { forgotPasswordAction } from "../actions/auth-actions";
 
 const ForgotPasswordForm = () => {
   const { execute, isPending } = useAction(forgotPasswordAction, {
