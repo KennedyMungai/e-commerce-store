@@ -164,8 +164,13 @@ export const Product = pgTable("products", {
     })
     .notNull(),
   quantity: integer("quantity").default(0).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "date",
+  }).$onUpdate(() => new Date()),
 });
 
 export const ProductRelations = relations(Product, ({ many, one }) => ({
@@ -214,8 +219,13 @@ export const Category = pgTable("categories", {
   id: uuid("id").defaultRandom().primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 256 }).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "date",
+  }).$onUpdate(() => new Date()),
 });
 
 export const CategoryRelations = relations(Category, ({ many }) => ({
@@ -242,8 +252,13 @@ export const Order = pgTable("orders", {
     .default("standard")
     .notNull(),
   orderStatus: OrderStatus("order_status").default("processing").notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "date",
+  }).$onUpdate(() => new Date()),
 });
 
 export const OrderRelations = relations(Order, ({ one, many }) => ({
@@ -276,26 +291,27 @@ export const SelectOrderSchema = createSelectSchema(Order);
 
 export type SelectOrderType = z.infer<typeof SelectOrderSchema>;
 
-export const OrderItem = pgTable(
-  "order_items",
-  {
-    product_id: uuid("product_id")
-      .references(() => Product.id, { onDelete: "cascade" })
-      .notNull(),
-    order_id: uuid("order_id").references(() => Order.id, {
-      onDelete: "cascade",
-    }),
-    user_id: text("user_id").references(() => users.id, {
-      onDelete: "cascade",
-    }),
-    quantity: integer("quantity").default(1).notNull(),
-    createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
-  },
-  (table) => ({
-    pk: primaryKey({ columns: [table.product_id, table.order_id] }),
+// TODO: Use the multicolumn unique constraint
+export const OrderItem = pgTable("order_items", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  product_id: uuid("product_id")
+    .references(() => Product.id, { onDelete: "cascade" })
+    .notNull(),
+  order_id: uuid("order_id").references(() => Order.id, {
+    onDelete: "cascade",
   }),
-);
+  user_id: text("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
+  quantity: integer("quantity").default(1).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "date",
+  }).$onUpdate(() => new Date()),
+});
 
 export const OrderItemRelations = relations(OrderItem, ({ one }) => ({
   product: one(Product, {
@@ -330,8 +346,13 @@ export const Comment = pgTable("comments", {
     onDelete: "cascade",
   }),
   commentText: text("comment").notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "date",
+  }).$onUpdate(() => new Date()),
 });
 
 export const CommentRelations = relations(Comment, ({ one }) => ({
@@ -358,23 +379,24 @@ export const SelectCommentSchema = createSelectSchema(Comment);
 
 export type SelectCommentType = z.infer<typeof SelectCommentSchema>;
 
-export const ProductRating = pgTable(
-  "product_ratings",
-  {
-    user_id: text("user_id").references(() => users.id, {
-      onDelete: "cascade",
-    }),
-    product_id: uuid("product_id").references(() => Product.id, {
-      onDelete: "cascade",
-    }),
-    rating: integer("rating").default(0).notNull(),
-  },
-  (table) => ({
-    pk: primaryKey({
-      columns: [table.user_id, table.product_id],
-    }),
+// TODO: Use the multicolumn unique constraint
+export const ProductRating = pgTable("product_ratings", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  user_id: text("user_id").references(() => users.id, {
+    onDelete: "cascade",
   }),
-);
+  product_id: uuid("product_id").references(() => Product.id, {
+    onDelete: "cascade",
+  }),
+  rating: integer("rating").default(0).notNull(),
+  created_at: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "date",
+  }).$onUpdate(() => new Date()),
+});
 
 export const ProductRatingRelations = relations(ProductRating, ({ one }) => ({
   product: one(Product, {
@@ -404,8 +426,13 @@ export const Supplier = pgTable("suppliers", {
   name: varchar("name", { length: 256 }).notNull(),
   email: varchar("email", { length: 256 }).notNull(),
   phoneNumber: varchar("phone_number", { length: 13 }).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "date",
+  }).$onUpdate(() => new Date()),
 });
 
 export const SupplierRelations = relations(Supplier, ({ many }) => ({
@@ -430,8 +457,13 @@ export const WishList = pgTable("wishlists", {
   product_id: uuid("product_id").references(() => Product.id, {
     onDelete: "cascade",
   }),
-  created_at: timestamp("created_at").defaultNow().notNull(),
-  updated_at: timestamp("updated_at").$onUpdate(() => new Date()),
+  created_at: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "date",
+  }).$onUpdate(() => new Date()),
 });
 
 export const WishListRelations = relations(WishList, ({ one }) => ({
