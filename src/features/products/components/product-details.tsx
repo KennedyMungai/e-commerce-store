@@ -24,22 +24,24 @@ const ProductDetails = ({ productId }: Props) => {
   //   TODO: Fix the markup
   return (
     <div className="scrollbar-none h-[90vh] overflow-y-auto p-4">
-      <div className="grid size-full grid-flow-col grid-cols-2">
-        <div className="flex basis-1/2 items-center justify-center">
-          {productData.data.image_url ? (
+      <div className="flex size-full gap-x-2">
+        <div className="relative col-span-1 size-full text-rose-500">
+          {productData.data.image_url && (
             <Image
               src={productData.data.image_url}
-              width={200}
-              height={200}
+              fill
               alt={productData.data.name}
+              className="rounded-md object-fill"
             />
-          ) : (
-            <ImageOffIcon className="size-96" />
+          )}
+          {!productData.data.image_url && (
+            <div className="flex h-full w-full items-center justify-center rounded-md bg-neutral-100">
+              <ImageOffIcon size={48} />
+            </div>
           )}
         </div>
-        <div className="basis-1/2">
-          <h3>{productData.data.name}</h3>
-          <p>{productData.data.description}</p>
+        <div className="relative size-full">
+          <h2>{productData.data.name}</h2>
         </div>
       </div>
     </div>
