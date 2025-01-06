@@ -22,9 +22,27 @@ export const SupplierColumns: ColumnDef<SelectSupplierType>[] = [
   {
     accessorKey: "email",
     header: "Email",
+    cell: ({ row }) => {
+      const { email } = row.original;
+
+      return (
+        <Link href={`mailto:${email}`} className="hover:underline">
+          {email}
+        </Link>
+      );
+    },
   },
   {
     accessorKey: "phoneNumber",
     header: "Phone Number",
+    cell: ({ row }) => {
+      const { phoneNumber } = row.original;
+
+      return (
+        <Link href={`tel:${phoneNumber}`} className="hover:underline">
+          {phoneNumber}
+        </Link>
+      );
+    },
   },
 ];
