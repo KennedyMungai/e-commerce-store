@@ -39,7 +39,7 @@ const ProductDetails = ({ productId }: Props) => {
         </div>
         <div className="basis-1/2">
           <h3>{productData.data.name}</h3>
-          <p></p>
+          <p>{productData.data.description}</p>
         </div>
       </div>
     </div>
