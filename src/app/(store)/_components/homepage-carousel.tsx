@@ -65,7 +65,7 @@ const HomePageCarousel = () => {
           <CarouselItem key={index} className="size-full">
             <div className="size-full">
               <Card className="aspect-[9/8] size-full rounded-sm shadow-none dark:bg-slate-800">
-                <CardContent className="flex size-full items-center justify-center p-6">
+                <CardContent className="relative flex size-full items-center justify-center p-6">
                   <Link
                     href={`/categories/${item.categoryId}`}
                     title={item.category}
