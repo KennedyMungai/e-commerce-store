@@ -23,7 +23,7 @@ const ProductDetails = ({ productId }: Props) => {
 
   //   TODO: Fix the markup
   return (
-    <div className="h-[90vh] p-4">
+    <div className="scrollbar-none h-[90vh] overflow-y-auto p-4">
       <div className="grid size-full grid-flow-col grid-cols-2">
         <div className="flex basis-1/2 items-center justify-center">
           {productData.data.image_url ? (
