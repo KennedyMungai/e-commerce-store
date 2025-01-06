@@ -317,8 +317,8 @@ const AddProductForm = () => {
                     <SelectValue placeholder="Select the product supplier" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  {/* TODO: Implement the loading and error states */}
+                <SelectContent className="h-60 overflow-y-auto">
+                  {/* TODO: Implement the data loading and error states */}
                   {suppliersData?.data.map((supplier) => (
                     <SelectItem
                       value={supplier.id}
