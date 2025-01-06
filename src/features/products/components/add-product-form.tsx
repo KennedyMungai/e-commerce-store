@@ -107,6 +107,9 @@ const AddProductForm = () => {
       {
         onError: () => {
           form.reset();
+        },
+        onSuccess: () => {
+          form.reset();
 
           close();
         },
