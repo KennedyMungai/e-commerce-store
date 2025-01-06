@@ -7,6 +7,16 @@ import { Hono } from "hono";
 import { z } from "zod";
 
 export const products = new Hono()
+  // HACK: This endpoint fetches all products from the database. This is a security risk and should be avoided in production.
+  .get("/all", verifyAuth(), async (c) => {
+    const auth = c.get("authUser");
+
+    if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
+
+    const data = await db.select().from(Product);
+
+    return c.json({ data });
+  })
   .get(
     "/:categoryId",
     verifyAuth(),
