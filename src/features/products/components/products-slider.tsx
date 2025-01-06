@@ -3,6 +3,7 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useFetchAllProducts } from "@/features/products/api/use-fetch-all-products";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductsSlider = () => {
   const {
@@ -22,7 +23,11 @@ const ProductsSlider = () => {
   return (
     <ScrollArea className="flex h-fit w-full flex-row gap-x-2 overflow-x-auto border-2 p-2">
       {productsData.data.map((product) => (
-        <div className="relative aspect-video h-full" key={product.id}>
+        <Link
+          href={`/products/${product.id}`}
+          className="relative aspect-video h-full"
+          key={product.id}
+        >
           <Image
             src={product.image_url ?? ""}
             width={200}
@@ -31,7 +36,7 @@ const ProductsSlider = () => {
             className="rounded-md object-fill"
           />
           <p>{product.name}</p>
-        </div>
+        </Link>
       ))}
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
