@@ -32,20 +32,20 @@ const StoreNavbar = () => {
         <div className="flex items-center gap-2">
           <ModeToggle />
           <UserButton />
-          {session.data &&
+          {/* {session.data &&
             (session.data.user?.role === "admin" ||
-              session.data.user?.role === "superadmin") && (
-              <Button
-                variant={"outline"}
-                size="icon"
-                title="Go to dashboard"
-                asChild
-              >
-                <Link href="/dashboard">
-                  <HeadsetIcon className="size-5" />
-                </Link>
-              </Button>
-            )}
+              session.data.user?.role === "superadmin") && ( */}
+          <Button
+            variant={"outline"}
+            size="icon"
+            title="Go to dashboard"
+            asChild
+          >
+            <Link href="/dashboard">
+              <HeadsetIcon className="size-5" />
+            </Link>
+          </Button>
+          {/* )} */}
         </div>
       </div>
     </nav>
