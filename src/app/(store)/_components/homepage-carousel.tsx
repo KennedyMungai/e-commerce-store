@@ -74,7 +74,7 @@ const HomePageCarousel = () => {
                       src={item.imageUrl}
                       alt={item.category}
                       fill
-                      className="rounded-sm"
+                      className="rounded-sm object-cover"
                     />
                   </Link>
                 </CardContent>
