@@ -47,7 +47,7 @@ const CategoryItems = ({ categoryId }: Props) => {
     .filter((product) => product.image_url !== null);
 
   return (
-    <div className="h-full overflow-y-auto p-4">
+    <div className="scrollbar-none h-full overflow-y-auto p-4">
       <h3 className="text-2xl font-semibold capitalize text-neutral-700">
         {categoryData?.data.name}
       </h3>
