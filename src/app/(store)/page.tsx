@@ -2,11 +2,12 @@ import BannersSection from "@/app/(store)/_components/banners-section";
 import CategoriesSidebar from "@/app/(store)/_components/categories-sidebar";
 import HomePageCarousel from "@/app/(store)/_components/homepage-carousel";
 import { Separator } from "@/components/ui/separator";
+import ProductsSlider from "@/features/products/components/products-slider";
 import { ArrowDownIcon } from "lucide-react";
 
 const HomePage = () => {
   return (
-    <main className="h-full overflow-y-auto">
+    <main className="scrollbar-none h-full overflow-y-auto">
       <div className="flex h-[75vh] w-full justify-between gap-2">
         <div>
           <CategoriesSidebar />
@@ -22,6 +23,9 @@ const HomePage = () => {
           <ArrowDownIcon className="size-3 animate-bounce" />
         </div>
       </Separator>
+      <div>
+        <ProductsSlider />
+      </div>
     </main>
   );
 };
