@@ -26,7 +26,7 @@ const CategoriesSidebar = () => {
 
   return (
     <div className="flex h-full w-36 flex-col items-center overflow-y-auto rounded-md border-2 border-neutral-400 p-1 dark:border-neutral-300">
-      <ul>
+      <ul className="space-y-2">
         {categories.map((category) => (
           <li
             key={category.id}
