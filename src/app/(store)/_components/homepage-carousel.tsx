@@ -59,6 +59,9 @@ const HomePageCarousel = () => {
       className="relative mx-12 size-full flex-1"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
+      opts={{
+        loop: true,
+      }}
     >
       <CarouselContent className="h-full rounded-sm">
         {carouselItems.map((item, index) => (
