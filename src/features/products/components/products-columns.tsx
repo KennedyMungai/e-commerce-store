@@ -110,12 +110,20 @@ export const ProductsColumns: ColumnDef<{
     },
   },
   {
+    // TODO: Add the supplier name
     id: "Supplier",
     header: "Supplier",
     cell: ({ row }) => {
       const { supplier_id } = row.original;
 
-      return <div>{supplier_id}</div>;
+      return (
+        <Link
+          href={`/dashboard/suppliers/supplier/${supplier_id}`}
+          className="hover:underline"
+        >
+          {supplier_id}
+        </Link>
+      );
     },
   },
   {
