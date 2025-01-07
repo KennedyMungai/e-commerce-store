@@ -30,6 +30,7 @@ export const ProductsColumns: ColumnDef<{
   updatedAt: Date | null;
   category_id: string;
   quantity: number;
+  supplier: string;
 }>[] = [
   {
     id: "select",
@@ -112,6 +113,15 @@ export const ProductsColumns: ColumnDef<{
   {
     id: "supplier",
     header: "Supplier",
+    cell: ({ row }) => {
+      const { supplier_id, supplier } = row.original;
+
+      return (
+        <Link href={`/dashboard/suppliers/supplier/${supplier_id}`}>
+          {supplier}
+        </Link>
+      );
+    },
   },
   {
     id: "actions",
