@@ -17,6 +17,7 @@ export const products = new Hono()
 
     return c.json({ data });
   })
+  // TODO: Implement a join with the suppliers table to show the suppliers name
   .get(
     "/:categoryId",
     verifyAuth(),
