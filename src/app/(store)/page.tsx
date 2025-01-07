@@ -23,7 +23,7 @@ const HomePage = () => {
           <ArrowDownIcon className="size-3 animate-bounce" />
         </div>
       </Separator>
-      <div className="max-h-72">
+      <div className="max-h-72 w-full overflow-x-auto scrollbar-none">
         <ProductsSlider />
       </div>
     </main>
