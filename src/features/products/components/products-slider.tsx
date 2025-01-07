@@ -21,25 +21,24 @@ const ProductsSlider = () => {
   //   TODO: Make the items scroll horizontally
 
   return (
-    <ScrollArea className="flex h-fit w-full flex-row gap-x-2 overflow-x-auto border-2 p-2">
+    <div className="flex h-fit w-full flex-row gap-x-6 overflow-x-auto border-2 p-2">
       {productsData.data.map((product) => (
         <Link
           href={`/products/${product.id}`}
           className="relative aspect-video h-full"
           key={product.id}
+          title={product.name}
         >
           <Image
             src={product.image_url ?? ""}
-            width={200}
-            height={200}
+            fill
             alt={product.name}
             className="rounded-md object-fill"
           />
           <p>{product.name}</p>
         </Link>
       ))}
-      <ScrollBar orientation="horizontal" />
-    </ScrollArea>
+    </div>
   );
 };
 
