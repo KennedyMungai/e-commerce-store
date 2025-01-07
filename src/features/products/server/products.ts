@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { InsertProductSchema, Product } from "@/db/schema";
+import { InsertProductSchema, Product, Supplier } from "@/db/schema";
 import { verifyAuth } from "@hono/auth-js";
 import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";
@@ -17,7 +17,6 @@ export const products = new Hono()
 
     return c.json({ data });
   })
-  // TODO: Implement a join with the suppliers table to show the suppliers name
   .get(
     "/:categoryId",
     verifyAuth(),
@@ -29,8 +28,23 @@ export const products = new Hono()
       if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
 
       const data = await db
-        .select()
+        .select({
+          id: Product.id,
+          name: Product.name,
+          description: Product.description,
+          price: Product.price,
+          image_url: Product.image_url,
+          colors: Product.colors,
+          sizes: Product.sizes,
+          supplier_id: Product.supplier_id,
+          createdAt: Product.createdAt,
+          updatedAt: Product.updatedAt,
+          category_id: Product.category_id,
+          quantity: Product.quantity,
+          supplier: Supplier.name,
+        })
         .from(Product)
+        .innerJoin(Supplier, eq(Product.supplier_id, Supplier.id))
         .where(eq(Product.category_id, categoryId));
 
       return c.json({ data });

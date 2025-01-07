@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import UploadImageButton from "@/features/products/components/upload-image";
-import SupplierNameCell from "@/features/suppliers/components/supplier-name-cell";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowUpDownIcon,
@@ -111,11 +110,8 @@ export const ProductsColumns: ColumnDef<{
     },
   },
   {
-    id: "Supplier",
+    id: "supplier",
     header: "Supplier",
-    cell: ({ row }) => (
-      <SupplierNameCell supplier_id={row.original.supplier_id} />
-    ),
   },
   {
     id: "actions",
